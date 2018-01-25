@@ -1,6 +1,6 @@
 <template>
   <div id="calculator" >
-    <h1>Calculator</h1>
+    <h1>Calculator 💃</h1>
     <label>trials</label>
     <input v-model="trials"/>
     <label>years</label>
@@ -13,7 +13,7 @@
     <input v-model="dislocation"/>
     <label>failure utility</label>
     <input v-model="failure"/>
-    <button v-on:click="all">Calculate</button>
+    <button v-on:click="all">Calculate 📈</button>
     <h3 v-if="totalResult.length > 0">Average value of total: {{ totalAvg }}</h3>
     <h3 v-if="hemiResult.length > 0 ">Average value of hemi: {{ hemiAvg }}</h3>
   </div>
@@ -77,7 +77,22 @@ export default {
     flex-direction: column;
   }
 
-  #calculator input {
+  input {
     margin-bottom: 0.5rem;
+  }
+
+  button {
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    background: cornflowerblue;
+    color: white;
+    padding: 1rem;
+  }
+
+  button:active {
+    position: relative;
+    top: 1px;
   }
 </style>
