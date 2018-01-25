@@ -14,8 +14,8 @@
     <label>failure utility</label>
     <input v-model="failure"/>
     <button v-on:click="all">Calculate</button>
-    <h2 v-if="totalResult.length > 0">Average value of total: {{ totalAvg }}</h2>
-    <h2 v-if="hemiResult.length > 0 ">Average value of hemi: {{ hemiAvg }}</h2>
+    <h3 v-if="totalResult.length > 0">Average value of total: {{ totalAvg }}</h3>
+    <h3 v-if="hemiResult.length > 0 ">Average value of hemi: {{ hemiAvg }}</h3>
   </div>
 </template>
 
@@ -58,11 +58,14 @@ export default {
       this.totalResult = [ ...this.totalResult, result.total ]
       this.hemiResult = [ ...this.hemiResult, result.hemi ]
     },
-    all: function () {
-      [...Array(this.trials)].forEach(() => this.single())
-    },
     average: function (arr) {
       return arr.reduce((p, c) => p + c, 0) / arr.length
+    },
+    all: function () {
+      this.totalResult = []
+      this.hemiResult = []
+      const trials = [ ...Array(this.trials) ]
+      trials.forEach(this.single)
     }
   }
 }
