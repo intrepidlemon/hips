@@ -2,17 +2,17 @@
   <div id="calculator" >
     <h1>Calculator 💃</h1>
     <label>trials</label>
-    <input v-model="trials"/>
+    <input v-model.number="trials"/>
     <label>years</label>
-    <input v-model="years"/>
+    <input v-model.number="years"/>
     <label>std</label>
-    <input v-model="std"/>
+    <input v-model.number="std"/>
     <label>success utility</label>
-    <input v-model="success"/>
+    <input v-model.number="success"/>
     <label>dislocation utility</label>
-    <input v-model="dislocation"/>
+    <input v-model.number="dislocation"/>
     <label>failure utility</label>
-    <input v-model="failure"/>
+    <input v-model.number="failure"/>
     <button v-on:click="all">Calculate 📈</button>
     <h3 v-if="totalResult.length > 0">Average value of total: {{ totalAvg }}</h3>
     <h3 v-if="hemiResult.length > 0 ">Average value of hemi: {{ hemiAvg }}</h3>
