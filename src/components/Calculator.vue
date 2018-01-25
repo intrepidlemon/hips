@@ -60,7 +60,6 @@ export default {
     },
     all: function () {
       [...Array(this.trials)].forEach(() => this.single())
-      console.log(this.trials)
     },
     average: function (arr) {
       return arr.reduce((p, c) => p + c, 0) / arr.length
@@ -73,5 +72,9 @@ export default {
   #calculator {
     display: flex;
     flex-direction: column;
+  }
+
+  #calculator input {
+    margin-bottom: 0.5rem;
   }
 </style>
