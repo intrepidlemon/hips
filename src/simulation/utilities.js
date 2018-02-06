@@ -5,14 +5,15 @@ const dislocationUtil = util => () => util
 const failureUtil = util => () => util
 
 // successUtil returns the utility for a success for a year
-const successUtil = util => {
+const successUtil = maxUtil => {
+  let util = maxUtil
   // we're going to subtract 1 on the first try
   util = util + 1
   let i = 0
   return () => {
     i += 1
     const value = util - i
-    return value > 0 ? value : 0
+    return value > maxUtil / 2 ? value : maxUtil / 2
   }
 }
 

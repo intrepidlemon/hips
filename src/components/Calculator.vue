@@ -7,8 +7,10 @@
     <input v-model.number="years"/>
     <label>std</label>
     <input v-model.number="std"/>
-    <label>success utility</label>
-    <input v-model.number="success"/>
+    <label>total success utility</label>
+    <input v-model.number="totalSuccess"/>
+    <label>hemi success utility</label>
+    <input v-model.number="hemiSuccess"/>
     <label>dislocation utility</label>
     <input v-model.number="dislocation"/>
     <label>failure utility</label>
@@ -25,10 +27,12 @@ import { run } from '@/simulation'
 export default {
   name: 'Calculator',
   data () {
+    // TODO: add more fields from simulate/index.js/run
     return {
       years: 5,
       std: 2,
-      success: 10,
+      totalSuccess: 10,
+      hemiSuccess: 100,
       failure: 0,
       dislocation: 5,
       trials: 1000,
@@ -36,6 +40,7 @@ export default {
       hemiResult: []
     }
   },
+
   computed: {
     totalAvg: function () {
       return this.average(this.totalResult)
@@ -44,29 +49,41 @@ export default {
       return this.average(this.hemiResult)
     }
   },
+
   methods: {
+
     single: function () {
       const result = run(
         this.years,
         this.std,
         {
-          success: this.success,
-          failure: this.failure,
-          dislocation: this.dislocation
+          totalUtils: {
+            success: this.totalSuccess,
+            failure: this.failure,
+            dislocation: this.dislocation
+          },
+          hemiUtils: {
+            success: this.hemiSuccess,
+            failure: this.failure,
+            dislocation: this.dislocation
+          }
         }
       )
       this.totalResult = [ ...this.totalResult, result.total ]
       this.hemiResult = [ ...this.hemiResult, result.hemi ]
     },
+
     average: function (arr) {
       return arr.reduce((p, c) => p + c, 0) / arr.length
     },
+
     all: function () {
       this.totalResult = []
       this.hemiResult = []
       const trials = [ ...Array(this.trials) ]
       trials.forEach(this.single)
     }
+
   }
 }
 </script>
