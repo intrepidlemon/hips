@@ -5,14 +5,24 @@
     <input v-model.number="trials"/>
     <label>years</label>
     <input v-model.number="years"/>
-    <label>std</label>
-    <input v-model.number="std"/>
     <label>total success utility</label>
     <input v-model.number="totalSuccess"/>
     <label>hemi success utility</label>
     <input v-model.number="hemiSuccess"/>
     <label>dislocation utility</label>
     <input v-model.number="dislocation"/>
+    <label>total longetivity in years</label>
+    <input v-model.number="totalLongetivityYears"/>
+    <label>hemi longetivity in years</label>
+    <input v-model.number="hemiLongetivityYears"/>
+    <label>total longetivity percent survive</label>
+    <input v-model.number="totalLongetivityPercent"/>
+    <label>hemi longetivity percent survive</label>
+    <input v-model.number="hemiLongetivityPercent"/>
+    <label>total dislocation rate</label>
+    <input v-model.number="totalDislocationRate"/>
+    <label>hemi dislocation rate</label>
+    <input v-model.number="hemiDislocationRate"/>
     <label>failure utility</label>
     <input v-model.number="failure"/>
     <button v-on:click="all">Calculate 📈</button>
@@ -27,14 +37,18 @@ import { run } from '@/simulation'
 export default {
   name: 'Calculator',
   data () {
-    // TODO: add more fields from simulate/index.js/run
     return {
       years: 5,
-      std: 2,
-      totalSuccess: 10,
+      totalSuccess: 100,
       hemiSuccess: 100,
       failure: 0,
       dislocation: 5,
+      totalLongetivityYears: 12,
+      totalLongetivityPercent: 0.8,
+      hemiLongetivityYears: 6,
+      hemiLongetivityPercent: 0.8,
+      hemiDislocationRate: 0.10,
+      totalDislocationRate: 0.14,
       trials: 1000,
       totalResult: [],
       hemiResult: []
@@ -55,7 +69,7 @@ export default {
     single: function () {
       const result = run(
         this.years,
-        this.std,
+        this.years / 2,
         {
           totalUtils: {
             success: this.totalSuccess,
@@ -67,6 +81,20 @@ export default {
             failure: this.failure,
             dislocation: this.dislocation
           }
+        },
+        {
+          totalLongetivity: {
+            years: this.totalLongetivityYears,
+            percent: this.totalLongetivityPercent
+          },
+          hemiLongetivity: {
+            years: this.hemiLongetivityYears,
+            percent: this.hemiLongetivityPercent
+          }
+        },
+        {
+          totalDislocationRate: this.totalDislocationRate,
+          hemiDislocationRate: this.hemiDislocationRate
         }
       )
       this.totalResult = [ ...this.totalResult, result.total ]

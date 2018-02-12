@@ -12,8 +12,8 @@ export const run = (
 ) => {
   years = normalize({ mean: years, std: std })
 
-  const { totalDislocation, hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate })
-  const { totalFailure, hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity })
+  const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate })
+  const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity })
 
   return {
     total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }),

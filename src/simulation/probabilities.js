@@ -4,23 +4,25 @@ const totalDislocation = prob => () => prob
 // hemiDislocation returns the probably of dislocation for a total hip replacement
 const hemiDislocation = prob => () => prob
 
-// totalFailure returns the probability of failure for a total hip replacement
-// given the number of `years` that some `percent` of devices will survive
-// e.g. if by 10 years, 90% of devices survive, then years=10 and percent=0.90
-const totalFailure = ({ years, percent }) => {
-  // TODO: figure out this calculation
-  return () => {
-    return 0.3
-  }
+const failureFunction = ({ years, percent }) => {
+  const constant = 6 * (1 - percent) / (years * (years + 1) * (2 * years + 1))
+  return year => year ** 2 * constant
 }
 
-// hemiFailure returns the probability of failure for a total hip replacement
+// failureGenerator returns the probability of failure for a hip replacement
 // given the number of `years` that some `percent` of devices will survive
 // e.g. if by 10 years, 90% of devices survive, then years=10 and percent=0.90
-const hemiFailure = ({ years, percent }) => {
-  // TODO: figure out this calculation
+const failureGenerator = ({ years, percent }) => {
+  const func = failureFunction({ years, percent })
+  const maxFailure = func(years)
+  let i = 0 // is the current year
   return () => {
-    return 0.3
+    i += 1
+    if (i < years) {
+      return func(i)
+    } else {
+      return maxFailure
+    }
   }
 }
 
@@ -30,6 +32,6 @@ export const dislocation = ({ total, hemi }) => ({
 })
 
 export const failure = ({ total, hemi }) => ({
-  total: totalFailure(total),
-  hemi: hemiFailure(hemi)
+  total: failureGenerator(total),
+  hemi: failureGenerator(hemi)
 })
