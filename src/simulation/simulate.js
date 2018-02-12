@@ -22,7 +22,7 @@ const simulate = (years, utilities, probabilities) => {
   total += pSuccess * successUtil()
 
   if (years > 0) {
-    return total + pSuccess * simulate(years - 1, utilities, probabilities)
+    return total + simulate(years - 1, utilities, probabilities)
   }
   return total
 }
