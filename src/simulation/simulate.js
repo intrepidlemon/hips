@@ -1,3 +1,5 @@
+const NPV_DISCOUNT = 0.97
+
 // simulate is a recursive function that calculates the
 // of a device year after year
 const simulate = (years, utilities, probabilities) => {
@@ -22,7 +24,7 @@ const simulate = (years, utilities, probabilities) => {
   total += pSuccess * successUtil()
 
   if (years > 0) {
-    return total + simulate(years - 1, utilities, probabilities)
+    return total + NPV_DISCOUNT * simulate(years - 1, utilities, probabilities)
   }
   return total
 }
