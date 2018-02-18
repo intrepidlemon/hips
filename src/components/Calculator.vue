@@ -1,6 +1,10 @@
 <template>
   <div id="calculator" >
     <h1>Calculator 💃</h1>
+    <div class="section">
+      <input type="checkbox" v-model="useIncrementalGain"/>
+      <label>use incremental gain</label>
+    </div>
     <label>trials</label>
     <input v-model.number="trials"/>
     <label>years</label>
@@ -39,6 +43,7 @@ export default {
   data () {
     return {
       years: 5,
+      relativeValueOfHemi: 0.5,
       totalSuccess: 100,
       hemiSuccess: 100,
       failure: 0,
@@ -50,6 +55,7 @@ export default {
       hemiDislocationRate: 0.10,
       totalDislocationRate: 0.14,
       trials: 1000,
+      useIncrementalGain: false,
       totalResult: [],
       hemiResult: []
     }
@@ -74,12 +80,14 @@ export default {
           totalUtils: {
             success: this.totalSuccess,
             failure: this.failure,
-            dislocation: this.dislocation
+            dislocation: this.dislocation,
+            years: this.totalLongetivityYears
           },
           hemiUtils: {
             success: this.hemiSuccess,
             failure: this.failure,
-            dislocation: this.dislocation
+            dislocation: this.dislocation,
+            years: this.hemiLongetivityYears
           }
         },
         {
@@ -95,7 +103,8 @@ export default {
         {
           totalDislocationRate: this.totalDislocationRate,
           hemiDislocationRate: this.hemiDislocationRate
-        }
+        },
+        this.useIncrementalGain
       )
       this.totalResult = [ ...this.totalResult, result.total ]
       this.hemiResult = [ ...this.hemiResult, result.hemi ]
@@ -120,10 +129,29 @@ export default {
   #calculator {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .section > * {
+    width: auto;
+    margin: 0;
+  }
+
+  .section > * + * {
+    margin-left: 1rem;
   }
 
   input {
     margin-bottom: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   button {

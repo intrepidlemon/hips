@@ -1,5 +1,5 @@
 import { normalize } from './random'
-import simulate from './simulate'
+import simulate, { incrementalGain } from './simulate'
 import utilities from './utilities'
 import * as probabilities from './probabilities'
 
@@ -8,16 +8,20 @@ export const run = (
   std,
   { totalUtils, hemiUtils },
   { totalLongetivity, hemiLongetivity },
-  { totalDislocationRate, hemiDislocationRate }
+  { totalDislocationRate, hemiDislocationRate },
+  useIncrementalGain
 ) => {
   years = normalize({ mean: years, std: std })
 
   const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate })
   const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity })
 
+  const totalIncrementalGainFactor = useIncrementalGain ? incrementalGain() : () => 1
+  const hemiIncrementalGainFactor = useIncrementalGain ? incrementalGain() : () => 1
+
   return {
-    total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }),
-    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure })
+    total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalIncrementalGainFactor),
+    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiIncrementalGainFactor)
   }
 }
 
