@@ -29,7 +29,7 @@
     <input v-model.number="hemiDislocationRate"/>
     <label>failure utility</label>
     <input v-model.number="failure"/>
-    <button v-on:click="all">Calculate 📈</button>
+    <button v-on:click="all">Calculate</button>
     <h3 v-if="totalResult.length > 0">Average value of total: {{ totalAvg }}</h3>
     <h3 v-if="hemiResult.length > 0 ">Average value of hemi: {{ hemiAvg }}</h3>
   </div>
