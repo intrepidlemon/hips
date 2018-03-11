@@ -14,12 +14,12 @@ const simulate = (years, utilities, probabilities, incrementalGainFactor) => {
   const {
     dislocation: dislocationUtil,
     failure: failureUtil,
-    success: successUtil
+    success: successUtil,
   } = utilities
 
   const {
     dislocation: dislocationProb,
-    failure: failureProb
+    failure: failureProb,
   } = probabilities
 
   const pDislocation = dislocationProb()

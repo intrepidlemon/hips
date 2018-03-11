@@ -9,7 +9,7 @@ export const run = (
   { totalUtils, hemiUtils },
   { totalLongetivity, hemiLongetivity },
   { totalDislocationRate, hemiDislocationRate },
-  useIncrementalGain
+  useIncrementalGain,
 ) => {
   years = normalize({ mean: years, std: std })
 
@@ -21,7 +21,7 @@ export const run = (
 
   return {
     total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalIncrementalGainFactor),
-    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiIncrementalGainFactor)
+    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiIncrementalGainFactor),
   }
 }
 

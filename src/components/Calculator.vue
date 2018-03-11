@@ -42,22 +42,8 @@ export default {
   name: 'Calculator',
   data () {
     return {
-      years: 5,
-      relativeValueOfHemi: 0.5,
-      totalSuccess: 100,
-      hemiSuccess: 100,
-      failure: 0,
-      dislocation: 5,
-      totalLongetivityYears: 12,
-      totalLongetivityPercent: 0.8,
-      hemiLongetivityYears: 6,
-      hemiLongetivityPercent: 0.8,
-      hemiDislocationRate: 0.10,
-      totalDislocationRate: 0.14,
-      trials: 1000,
-      useIncrementalGain: false,
       totalResult: [],
-      hemiResult: []
+      hemiResult: [],
     }
   },
 
@@ -67,7 +53,119 @@ export default {
     },
     hemiAvg: function () {
       return this.average(this.hemiResult)
-    }
+    },
+    years: {
+      get () {
+        return this.$store.state.parameters.years
+      },
+      set (value) {
+        this.$store.commit('updateYears', value)
+      },
+    },
+    relativeValueOfHemi: {
+      get () {
+        return this.$store.state.parameters.relativeValueOfHemi
+      },
+      set (value) {
+        this.$store.commit('updateRelativeValueOfHemi', value)
+      },
+    },
+    totalSuccess: {
+      get () {
+        return this.$store.state.parameters.totalSuccess
+      },
+      set (value) {
+        this.$store.commit('updateTotalSuccess', value)
+      },
+    },
+    hemiSuccess: {
+      get () {
+        return this.$store.state.parameters.hemiSuccess
+      },
+      set (value) {
+        this.$store.commit('updateHemiSuccess', value)
+      },
+    },
+    failure: {
+      get () {
+        return this.$store.state.parameters.failure
+      },
+      set (value) {
+        this.$store.commit('updateFailure', value)
+      },
+    },
+    dislocation: {
+      get () {
+        return this.$store.state.parameters.dislocation
+      },
+      set (value) {
+        this.$store.commit('updateDislocation', value)
+      },
+    },
+    totalLongetivityYears: {
+      get () {
+        return this.$store.state.parameters.totalLongetivityYears
+      },
+      set (value) {
+        this.$store.commit('updateTotalLongetivityYears', value)
+      },
+    },
+    totalLongetivityPercent: {
+      get () {
+        return this.$store.state.parameters.totalLongetivityPercent
+      },
+      set (value) {
+        this.$store.commit('updateTotalLongetivityPercent', value)
+      },
+    },
+    hemiLongetivityYears: {
+      get () {
+        return this.$store.state.parameters.hemiLongetivityYears
+      },
+      set (value) {
+        this.$store.commit('updateHemiLongetivityYears', value)
+      },
+    },
+    hemiLongetivityPercent: {
+      get () {
+        return this.$store.state.parameters.hemiLongetivityPercent
+      },
+      set (value) {
+        this.$store.commit('updateHemiLongetivityPercent', value)
+      },
+    },
+    hemiDislocationRate: {
+      get () {
+        return this.$store.state.parameters.hemiDislocationRate
+      },
+      set (value) {
+        this.$store.commit('updateHemiDislocationRate', value)
+      },
+    },
+    totalDislocationRate: {
+      get () {
+        return this.$store.state.parameters.totalDislocationRate
+      },
+      set (value) {
+        this.$store.commit('updateTotalDislocationRate', value)
+      },
+    },
+    trials: {
+      get () {
+        return this.$store.state.parameters.trials
+      },
+      set (value) {
+        this.$store.commit('updateTrials', value)
+      },
+    },
+    useIncrementalGain: {
+      get () {
+        return this.$store.state.parameters.useIncrementalGain
+      },
+      set (value) {
+        this.$store.commit('updateUseIncrementalGain', value)
+      },
+    },
   },
 
   methods: {
@@ -81,30 +179,30 @@ export default {
             success: this.totalSuccess,
             failure: this.failure,
             dislocation: this.dislocation,
-            years: this.totalLongetivityYears
+            years: this.totalLongetivityYears,
           },
           hemiUtils: {
             success: this.hemiSuccess,
             failure: this.failure,
             dislocation: this.dislocation,
-            years: this.hemiLongetivityYears
-          }
+            years: this.hemiLongetivityYears,
+          },
         },
         {
           totalLongetivity: {
             years: this.totalLongetivityYears,
-            percent: this.totalLongetivityPercent
+            percent: this.totalLongetivityPercent,
           },
           hemiLongetivity: {
             years: this.hemiLongetivityYears,
-            percent: this.hemiLongetivityPercent
-          }
+            percent: this.hemiLongetivityPercent,
+          },
         },
         {
           totalDislocationRate: this.totalDislocationRate,
-          hemiDislocationRate: this.hemiDislocationRate
+          hemiDislocationRate: this.hemiDislocationRate,
         },
-        this.useIncrementalGain
+        this.useIncrementalGain,
       )
       this.totalResult = [ ...this.totalResult, result.total ]
       this.hemiResult = [ ...this.hemiResult, result.hemi ]
@@ -119,9 +217,9 @@ export default {
       this.hemiResult = []
       const trials = [ ...Array(this.trials) ]
       trials.forEach(this.single)
-    }
+    },
 
-  }
+  },
 }
 </script>
 

@@ -28,10 +28,10 @@ const failureGenerator = ({ years, percent }) => {
 
 export const dislocation = ({ total, hemi }) => ({
   total: totalDislocation(total),
-  hemi: hemiDislocation(hemi)
+  hemi: hemiDislocation(hemi),
 })
 
 export const failure = ({ total, hemi }) => ({
   total: failureGenerator(total),
-  hemi: failureGenerator(hemi)
+  hemi: failureGenerator(hemi),
 })

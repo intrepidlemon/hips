@@ -24,7 +24,7 @@ const successUtil = (maxUtil, years) => {
 const utilities = ({ success = 100, dislocation = 5, failure = 0, years = 10 }) => ({
   success: successUtil(success, years),
   dislocation: dislocationUtil(dislocation),
-  failure: failureUtil(failure)
+  failure: failureUtil(failure),
 })
 
 export default utilities
