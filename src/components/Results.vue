@@ -4,7 +4,7 @@
     v-on:click="close"
   >
     <div class="interior">
-      <h1>Results</h1>
+      <h1>Utility</h1>
       <Visualize/>
     </div>
   </div>
