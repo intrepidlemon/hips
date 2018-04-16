@@ -1,6 +1,6 @@
 const NPV_DISCOUNT = 0.97
 
-export const incrementalGain = () => {
+export const hyperbolicDiscount = () => {
   let i = 0
   return () => {
     i += 1
@@ -8,9 +8,17 @@ export const incrementalGain = () => {
   }
 }
 
+export const modifiedHyperbolicDiscount = () => {
+  let i = 0
+  return () => {
+    i += 1
+    return (i + 1) / (2 * i)
+  }
+}
+
 // simulate is a recursive function that calculates the
 // of a device year after year
-const simulate = (years, utilities, probabilities, incrementalGainFactor) => {
+const simulate = (years, utilities, probabilities, discount) => {
   const {
     dislocation: dislocationUtil,
     failure: failureUtil,
@@ -31,10 +39,10 @@ const simulate = (years, utilities, probabilities, incrementalGainFactor) => {
   total += pFailure * failureUtil()
   total += pSuccess * successUtil()
 
-  total *= incrementalGainFactor()
+  total *= discount()
 
   if (years > 0) {
-    return total + NPV_DISCOUNT * simulate(years - 1, utilities, probabilities, incrementalGainFactor)
+    return total + NPV_DISCOUNT * simulate(years - 1, utilities, probabilities, discount)
   }
   return total
 }

@@ -12,7 +12,7 @@ const state = {
   hemiDislocationRate: 0.10,
   totalDislocationRate: 0.14,
   trials: 1000,
-  useIncrementalGain: false,
+  discount: 'none',
 }
 
 const mutations = {
@@ -29,7 +29,7 @@ const mutations = {
   updateHemiDislocationRate: (state, value) => { state.hemiDislocationRate = value },
   updateTotalDislocationRate: (state, value) => { state.totalDislocationRate = value },
   updateTrials: (state, value) => { state.trials = value },
-  updateUseIncrementalGain: (state, value) => { state.useIncrementalGain = value },
+  updateDiscount: (state, value) => { state.discount = value },
 }
 
 export default {

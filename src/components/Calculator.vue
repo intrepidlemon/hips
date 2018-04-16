@@ -45,7 +45,7 @@ export default {
         hemiLongetivityPercent,
         totalDislocationRate,
         hemiDislocationRate,
-        useIncrementalGain,
+        discount,
       } = this.$store.state.parameters
       const result = run(
         years,
@@ -78,7 +78,7 @@ export default {
           totalDislocationRate: totalDislocationRate,
           hemiDislocationRate: hemiDislocationRate,
         },
-        useIncrementalGain,
+        discount,
       )
       this.$store.commit('pushTotal', result.total)
       this.$store.commit('pushHemi', result.hemi)

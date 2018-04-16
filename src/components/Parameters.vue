@@ -1,12 +1,16 @@
 <template>
   <div id="parameters">
     <div class="section">
-      <input type="checkbox" v-model="useIncrementalGain"/>
-      <label>use incremental gain</label>
+      <input type="radio" value="none" v-model="discount"/>
+      <label>no discounting</label>
+      <input type="radio" value="hyperbolic" v-model="discount"/>
+      <label>hyperbolic discounting</label>
+      <input type="radio" value="modified-hyperbolic" v-model="discount"/>
+      <label>modified hyperbolic discounting</label>
     </div>
     <label>trials</label>
     <input v-model.number="trials"/>
-    <label>years</label>
+    <label>life expectancy</label>
     <input v-model.number="years"/>
     <label>total success utility</label>
     <input v-model.number="totalSuccess"/>
@@ -139,12 +143,12 @@ export default {
         this.$store.commit('updateTrials', value)
       },
     },
-    useIncrementalGain: {
+    discount: {
       get () {
-        return this.$store.state.parameters.useIncrementalGain
+        return this.$store.state.parameters.discount
       },
       set (value) {
-        this.$store.commit('updateUseIncrementalGain', value)
+        this.$store.commit('updateDiscount', value)
       },
     },
   },

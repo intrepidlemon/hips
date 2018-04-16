@@ -1,5 +1,5 @@
 import { normalize } from './random'
-import simulate, { incrementalGain } from './simulate'
+import simulate, { hyperbolicDiscount, modifiedHyperbolicDiscount } from './simulate'
 import utilities from './utilities'
 import * as probabilities from './probabilities'
 
@@ -9,19 +9,29 @@ export const run = (
   { totalUtils, hemiUtils },
   { totalLongetivity, hemiLongetivity },
   { totalDislocationRate, hemiDislocationRate },
-  useIncrementalGain,
+  discount,
 ) => {
   years = normalize({ mean: years, std: std })
 
   const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate })
   const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity })
 
-  const totalIncrementalGainFactor = useIncrementalGain ? incrementalGain() : () => 1
-  const hemiIncrementalGainFactor = useIncrementalGain ? incrementalGain() : () => 1
+  let totalDiscount = () => 1
+  let hemiDiscount = () => 1
+  switch (discount) {
+    case 'hyperbolic':
+      totalDiscount = hyperbolicDiscount()
+      hemiDiscount = hyperbolicDiscount()
+      break
+    case 'modified-hyperbolic':
+      totalDiscount = modifiedHyperbolicDiscount()
+      hemiDiscount = modifiedHyperbolicDiscount()
+      break
+  }
 
   return {
-    total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalIncrementalGainFactor),
-    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiIncrementalGainFactor),
+    total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalDiscount),
+    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiDiscount),
   }
 }
 
