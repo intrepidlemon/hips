@@ -176,7 +176,7 @@ export default {
   }
 
   .section > * + * {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
 
   input {
