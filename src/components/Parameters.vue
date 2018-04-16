@@ -10,7 +10,7 @@
     </div>
     <label>trials</label>
     <input v-model.number="trials"/>
-    <label>life expectancy</label>
+    <label>life expectancy in years</label>
     <input v-model.number="years"/>
     <label>total success utility</label>
     <input v-model.number="totalSuccess"/>
