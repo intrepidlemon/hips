@@ -18,6 +18,8 @@
     <input v-model.number="hemiSuccess"/>
     <label>dislocation utility</label>
     <input v-model.number="dislocation"/>
+    <label>failure utility</label>
+    <input v-model.number="failure"/>
     <label>total longetivity in years</label>
     <input v-model.number="totalLongetivityYears"/>
     <label>hemi longetivity in years</label>
@@ -30,8 +32,6 @@
     <input v-model.number="totalDislocationRate"/>
     <label>hemi dislocation rate</label>
     <input v-model.number="hemiDislocationRate"/>
-    <label>failure utility</label>
-    <input v-model.number="failure"/>
   </div>
 </template>
 
