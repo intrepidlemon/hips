@@ -4,7 +4,6 @@
     v-on:click="close"
   >
     <div class="interior">
-      <h1>Utility</h1>
       <Visualize/>
     </div>
   </div>
@@ -38,13 +37,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 10vh;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.3);
   margin: 0;
 }
 .interior {
-  max-width: 90vw;
+  max-width: 95vh;
+  max-height: 90vh;
   width: 100%;
   background: white;
   padding: 1.5rem;
@@ -53,6 +52,7 @@ export default {
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 h1 {
   margin: 0;

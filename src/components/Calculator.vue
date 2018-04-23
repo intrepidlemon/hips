@@ -1,10 +1,10 @@
 <template>
-  <div id="calculator" >
+  <sui-container id="calculator" >
     <h1>Calculator 💃</h1>
     <Parameters/>
     <sui-button primary v-on:click="all">Calculate</sui-button>
     <Results v-if="showResults"/>
-  </div>
+  </sui-container>
 </template>
 
 <script>

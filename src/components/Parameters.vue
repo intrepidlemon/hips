@@ -1,63 +1,125 @@
 <template>
   <sui-form id="parameters">
-    <div class="section">
-      <input type="radio" value="none" v-model="discount"/>
-      <label>no discounting</label>
-      <input type="radio" value="hyperbolic" v-model="discount"/>
-      <label>hyperbolic discounting</label>
-      <input type="radio" value="modified-hyperbolic" v-model="discount"/>
-      <label>modified hyperbolic discounting</label>
-    </div>
     <sui-form-field>
-      <label>life expectancy in years</label>
-      <input v-model.number="years"/>
+      <label>expected years left to live</label>
+      <slider-field min="1" max="120" v-model="years"/>
     </sui-form-field>
-    <sui-form-field>
-      <label>total success utility</label>
-      <input v-model.number="totalSuccess"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>hemi success utility</label>
-      <input v-model.number="hemiSuccess"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>dislocation utility penalty</label>
-      <input v-model.number="dislocation"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>failure utility penalty</label>
-      <input v-model.number="failure"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>total longetivity in years</label>
-      <input v-model.number="totalLongetivityYears"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>hemi longetivity in years</label>
-      <input v-model.number="hemiLongetivityYears"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>total longetivity percent survive</label>
-      <input v-model.number="totalLongetivityPercent"/>
-    </sui-form-field>
-    <sui-form-field>
-      <label>hemi longetivity percent survive</label>
-      <input v-model.number="hemiLongetivityPercent"/>
-    </sui-form-field>
+    <sui-menu :widths="3">
+      <sui-menu-item
+        @click="discount = 'none'"
+        :active="discount === 'none'"
+      >
+        no discounting
+      </sui-menu-item>
+      <sui-menu-item
+        @click="discount = 'hyperbolic'"
+        :active="discount === 'hyperbolic'"
+      >
+        hyperbolic
+      </sui-menu-item>
+      <sui-menu-item
+        @click="discount = 'modified-hyperbolic'"
+        :active="discount === 'modified-hyperbolic'"
+      >
+        modified hyperbolic
+      </sui-menu-item>
+    </sui-menu>
+
+    <sui-card>
+      <sui-card-content>
+
+        <sui-menu :widths="3">
+          <sui-menu-item
+            @click="totalSuccess = 100; hemiSuccess = 100"
+            :active="totalSuccess === 100 && hemiSuccess === 100"
+          >
+            standard patient
+          </sui-menu-item>
+          <sui-menu-item
+            @click="totalSuccess = 100; hemiSuccess = 90"
+            :active="totalSuccess === 100 && hemiSuccess === 90"
+          >
+            high demand patient
+          </sui-menu-item>
+          <sui-menu-item
+            @click="totalSuccess = 100; hemiSuccess = 80"
+            :active="totalSuccess === 100 && hemiSuccess === 80"
+          >
+            very high demand patient
+          </sui-menu-item>
+        </sui-menu>
+
+        <div class="section">
+          <sui-form-field>
+            <label>total success utility</label>
+            <slider-field min="0" max="200" v-model="totalSuccess"/>
+          </sui-form-field>
+          <sui-form-field>
+            <label>hemi success utility</label>
+            <slider-field min="0" max="200" v-model="hemiSuccess"/>
+          </sui-form-field>
+        </div>
+
+        <div class="section">
+          <sui-form-field>
+            <label>dislocation utility penalty</label>
+            <slider-field min="0" max="100" v-model="dislocation"/>
+          </sui-form-field>
+          <sui-form-field>
+            <label>failure utility penalty</label>
+            <slider-field min="0" max="100" v-model="failure"/>
+          </sui-form-field>
+        </div>
+
+      </sui-card-content>
+    </sui-card>
+
+    <sui-card>
+      <sui-card-content>
+
+        <div class="section">
+          <sui-form-field>
+            <label>total longetivity in years</label>
+            <slider-field min="0" max="120" v-model="totalLongetivityYears"/>
+          </sui-form-field>
+          <sui-form-field>
+            <label>hemi longetivity in years</label>
+            <slider-field min="0" max="120" v-model="hemiLongetivityYears"/>
+          </sui-form-field>
+        </div>
+
+        <div class="section">
+          <sui-form-field>
+            <label>total longetivity percent survive</label>
+            <slider-field min="0" max="1" step="0.01" v-model="totalLongetivityPercent"/>
+          </sui-form-field>
+          <sui-form-field>
+            <label>hemi longetivity percent survive</label>
+            <slider-field min="0" max="1" step="0.01" v-model="hemiLongetivityPercent"/>
+          </sui-form-field>
+        </div>
+      </sui-card-content>
+    </sui-card>
+
     <sui-form-field>
       <label>total dislocation rate above hemi dislocation rate</label>
-      <input v-model.number="totalDislocationRate"/>
+      <slider-field min="0" max="1" step="0.01" v-model="totalDislocationRate"/>
     </sui-form-field>
     <sui-form-field>
       <label>clinical significance</label>
-      <input v-model.number="clinicalSignificance"/>
+      <slider-field min="0" max="1" step="0.01" v-model="clinicalSignificance"/>
     </sui-form-field>
   </sui-form>
 </template>
 
 <script>
+import SliderField from './SliderField.vue'
+
 export default {
   name: 'Parameters',
+  components: {
+    SliderField,
+  },
   computed: {
     years: {
       get () {
@@ -180,7 +242,6 @@ export default {
   #parameters > * {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 1rem;
     margin: 0;
   }
 
@@ -188,25 +249,29 @@ export default {
     margin-top: 1rem;
   }
 
-  .section {
+  #parameters .section {
     display: flex;
     width: 100%;
     justify-content: flex-start;
     align-items: center;
   }
 
-  .section > * {
+  #parameters .section > * {
     width: auto;
     margin: 0;
+    flex-grow: 1;
   }
 
-  .section > * + * {
-    margin-left: 0.5rem;
+  #parameters .section > * + * {
+    margin-left: 1rem;
   }
 
-  input {
-    margin-bottom: 0.5rem;
-    box-sizing: border-box;
-    width: 100%;
+  .menu .item {
+    cursor: pointer;
   }
+
+  .content > * + * {
+    margin-top: 1rem;
+  }
+
 </style>
