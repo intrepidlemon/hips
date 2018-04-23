@@ -2,7 +2,7 @@
   <div id="calculator" >
     <h1>Calculator 💃</h1>
     <Parameters/>
-    <button v-on:click="all">Calculate</button>
+    <sui-button primary v-on:click="all">Calculate</sui-button>
     <Results v-if="showResults"/>
   </div>
 </template>
@@ -98,21 +98,13 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
   }
-
-  button {
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    border: none;
-    background: cornflowerblue;
-    color: white;
-    padding: 1rem;
+  #calculator > * {
+    flex-shrink: 0;
   }
-
-  button:active {
-    position: relative;
-    top: 1px;
+  #calculator > * + * {
+    margin-top: 1rem;
   }
 </style>

@@ -36,12 +36,16 @@ export default {
   box-sizing: border-box;
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 10vh;
   background: rgba(0, 0, 0, 0.3);
+  margin: 0;
 }
 .interior {
-  width: 70vw;
+  max-width: 90vw;
+  width: 100%;
   background: white;
   padding: 1.5rem;
   box-sizing: border-box;

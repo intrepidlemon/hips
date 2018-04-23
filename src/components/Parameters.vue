@@ -1,5 +1,5 @@
 <template>
-  <div id="parameters">
+  <sui-form id="parameters">
     <div class="section">
       <input type="radio" value="none" v-model="discount"/>
       <label>no discounting</label>
@@ -8,31 +8,51 @@
       <input type="radio" value="modified-hyperbolic" v-model="discount"/>
       <label>modified hyperbolic discounting</label>
     </div>
-    <label>trials</label>
-    <input v-model.number="trials"/>
-    <label>life expectancy in years</label>
-    <input v-model.number="years"/>
-    <label>total success utility</label>
-    <input v-model.number="totalSuccess"/>
-    <label>hemi success utility</label>
-    <input v-model.number="hemiSuccess"/>
-    <label>dislocation utility</label>
-    <input v-model.number="dislocation"/>
-    <label>failure utility</label>
-    <input v-model.number="failure"/>
-    <label>total longetivity in years</label>
-    <input v-model.number="totalLongetivityYears"/>
-    <label>hemi longetivity in years</label>
-    <input v-model.number="hemiLongetivityYears"/>
-    <label>total longetivity percent survive</label>
-    <input v-model.number="totalLongetivityPercent"/>
-    <label>hemi longetivity percent survive</label>
-    <input v-model.number="hemiLongetivityPercent"/>
-    <label>total dislocation rate</label>
-    <input v-model.number="totalDislocationRate"/>
-    <label>hemi dislocation rate</label>
-    <input v-model.number="hemiDislocationRate"/>
-  </div>
+    <sui-form-field>
+      <label>life expectancy in years</label>
+      <input v-model.number="years"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>total success utility</label>
+      <input v-model.number="totalSuccess"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>hemi success utility</label>
+      <input v-model.number="hemiSuccess"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>dislocation utility penalty</label>
+      <input v-model.number="dislocation"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>failure utility penalty</label>
+      <input v-model.number="failure"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>total longetivity in years</label>
+      <input v-model.number="totalLongetivityYears"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>hemi longetivity in years</label>
+      <input v-model.number="hemiLongetivityYears"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>total longetivity percent survive</label>
+      <input v-model.number="totalLongetivityPercent"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>hemi longetivity percent survive</label>
+      <input v-model.number="hemiLongetivityPercent"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>total dislocation rate above hemi dislocation rate</label>
+      <input v-model.number="totalDislocationRate"/>
+    </sui-form-field>
+    <sui-form-field>
+      <label>clinical significance</label>
+      <input v-model.number="clinicalSignificance"/>
+    </sui-form-field>
+  </sui-form>
 </template>
 
 <script>
@@ -119,28 +139,14 @@ export default {
         this.$store.commit('updateHemiLongetivityPercent', value)
       },
     },
-    hemiDislocationRate: {
-      get () {
-        return this.$store.state.parameters.hemiDislocationRate
-      },
-      set (value) {
-        this.$store.commit('updateHemiDislocationRate', value)
-      },
-    },
     totalDislocationRate: {
       get () {
-        return this.$store.state.parameters.totalDislocationRate
+        const { totalDislocationRate, hemiDislocationRate } = this.$store.state.parameters
+        return totalDislocationRate - hemiDislocationRate
       },
       set (value) {
-        this.$store.commit('updateTotalDislocationRate', value)
-      },
-    },
-    trials: {
-      get () {
-        return this.$store.state.parameters.trials
-      },
-      set (value) {
-        this.$store.commit('updateTrials', value)
+        const { hemiDislocationRate } = this.$store.state.parameters
+        this.$store.commit('updateTotalDislocationRate', value + hemiDislocationRate)
       },
     },
     discount: {
@@ -149,6 +155,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateDiscount', value)
+      },
+    },
+    clinicalSignificance: {
+      get () {
+        return this.$store.state.parameters.clinicalSignificance
+      },
+      set (value) {
+        this.$store.commit('updateClinicalSignificance', value)
       },
     },
   },
@@ -161,6 +175,17 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+  }
+
+  #parameters > * {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    margin: 0;
+  }
+
+  #parameters > * + * {
+    margin-top: 1rem;
   }
 
   .section {

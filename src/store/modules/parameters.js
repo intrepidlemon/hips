@@ -3,16 +3,17 @@ const state = {
   relativeValueOfHemi: 0.5,
   totalSuccess: 100,
   hemiSuccess: 100,
-  failure: 0,
+  failure: 100,
   dislocation: 5,
   totalLongetivityYears: 12,
   totalLongetivityPercent: 0.8,
   hemiLongetivityYears: 6,
   hemiLongetivityPercent: 0.8,
-  hemiDislocationRate: 0.10,
+  hemiDislocationRate: 0.04,
   totalDislocationRate: 0.14,
   trials: 1000,
   discount: 'none',
+  clinicalSignificance: 0.05,
 }
 
 const mutations = {
@@ -30,6 +31,7 @@ const mutations = {
   updateTotalDislocationRate: (state, value) => { state.totalDislocationRate = value },
   updateTrials: (state, value) => { state.trials = value },
   updateDiscount: (state, value) => { state.discount = value },
+  updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
 }
 
 export default {

@@ -1,8 +1,8 @@
 // dislocationUtil returns the utility of a dislocation
-const dislocationUtil = util => () => util
+const dislocationUtil = (success, penalty) => () => success - penalty
 
 // failureUtil returns the utility of a failure
-const failureUtil = util => () => util
+const failureUtil = (success, penalty) => () => success - penalty
 
 const discountFunction = ({ years }) => {
   const constant = 6 / (years * (years + 1) * (2 * years + 1))
@@ -21,10 +21,10 @@ const successUtil = (maxUtil, years) => {
   }
 }
 
-const utilities = ({ success = 100, dislocation = 5, failure = 0, years = 10 }) => ({
+const utilities = ({ success = 100, dislocation = 5, failure = 100, years = 10 }) => ({
   success: successUtil(success, years),
-  dislocation: dislocationUtil(dislocation),
-  failure: failureUtil(failure),
+  dislocation: dislocationUtil(success, dislocation),
+  failure: failureUtil(success, failure),
 })
 
 export default utilities
