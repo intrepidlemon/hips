@@ -17,6 +17,7 @@
     "semantic-ui-vue": "^0.2.8",
     "vue": "^2.5.2",
     "vue-markdown": "^2.2.4",
+    "vue-multianalytics": "^1.9.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.2"

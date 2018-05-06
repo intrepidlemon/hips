@@ -56,6 +56,10 @@ export default {
   methods: {
     run: function () {
       this.showResults = true
+      this.$ma.trackEvent({
+        action: 'run-total-vs-hemi-calculation',
+        properties: this.$store.state.parameters,
+      })
     },
   },
 }
