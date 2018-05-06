@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import uuid from 'uuid/v4'
+
 import Parameters from './Parameters.vue'
 import Results from './Results.vue'
 import Wizard from './Wizard.vue'
@@ -51,16 +53,27 @@ export default {
         this.$store.commit('updateWizard', value)
       },
     },
+    identifier: {
+      get () {
+        return this.$store.state.settings.identifier
+      },
+      set (value) {
+        this.$store.commit('updateIdentifier', value)
+      },
+    },
   },
 
   methods: {
     run: function () {
       this.showResults = true
-      this.$ma.trackEvent({
-        action: 'run-total-vs-hemi-calculation',
-        properties: this.$store.state.parameters,
-      })
     },
+  },
+
+  mounted: function () {
+    if (this.identifier === '') {
+      this.identifier = uuid()
+    }
+    this.$ma.identify({ userId: this.identifier })
   },
 }
 </script>

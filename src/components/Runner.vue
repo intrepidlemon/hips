@@ -87,6 +87,10 @@ export default {
   },
   mounted: function () {
     this.all()
+    this.$ma.trackEvent({
+      action: 'run-total-vs-hemi-calculation',
+      properties: this.$store.state.parameters,
+    })
   },
   destroyed: function () {
     this.clear()
