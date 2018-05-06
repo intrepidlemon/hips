@@ -2,7 +2,9 @@
   <sui-container id="calculator" >
     <h1>Calculator 💃</h1>
     <Parameters/>
-    <sui-button primary v-on:click="run">Calculate</sui-button>
+    <div class="calculate-button" is="sui-container">
+      <sui-button primary v-on:click="run">Calculate</sui-button>
+    </div>
     <sui-modal v-model="showResults" closeIcon>
       <sui-modal-content>
         <Results/>
@@ -54,7 +56,7 @@ export default {
   #calculator > * {
     flex-shrink: 0;
   }
-  #calculator > * + * {
+  .calculate-button {
     margin-top: 1rem;
   }
 </style>

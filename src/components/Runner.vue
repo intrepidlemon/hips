@@ -78,7 +78,7 @@ export default {
     all: function () {
       this.$store.commit('clear')
       const trials = [ ...Array(this.$store.state.parameters.trials) ]
-      this.timeouts = trials.map((_, i) => setTimeout(this.single, i * 3))
+      this.timeouts = trials.map((_, i) => setTimeout(this.single, i))
     },
     clear: function () {
       this.timeouts.forEach(i => clearTimeout(i))

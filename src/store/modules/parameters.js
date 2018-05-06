@@ -11,7 +11,7 @@ const state = {
   hemiLongetivityPercent: 0.8,
   hemiDislocationRate: 0.04,
   totalDislocationRate: 0.14,
-  trials: 1000,
+  trials: 250,
   discount: 'none',
   clinicalSignificance: 0.05,
 }

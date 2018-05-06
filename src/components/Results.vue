@@ -1,9 +1,36 @@
 <template>
-  <div
-    id="results"
-  >
+  <div id="results">
     <Runner v-if="showResults"/>
-    <Visualize/>
+    <div class="inner">
+      <div class="results-flex">
+        <div class="results-flex-center">
+          <h2>Average utility</h2>
+          <sui-statistics-group>
+            <sui-statistic in-group>
+              <sui-statistic-label>Total</sui-statistic-label>
+              <sui-statistic-value>{{ averageTotal.toFixed(2) }}</sui-statistic-value>
+            </sui-statistic>
+            <sui-statistic in-group>
+              <sui-statistic-label>Hemi</sui-statistic-label>
+              <sui-statistic-value>{{ averageHemi.toFixed(2) }}</sui-statistic-value>
+            </sui-statistic>
+          </sui-statistics-group>
+          <h3 v-if="significant">
+            {{ better }} is significantly better
+          </h3>
+          <h3 v-if="!significant">
+            Total and hemi are about the same
+          </h3>
+        </div>
+        <Visualize/>
+      </div>
+      <sui-progress
+        :state="finished ? 'success' : 'active' "
+        :indicating = "!finished"
+        :percent="progress"
+        size="tiny"
+      />
+    </div>
   </div>
 </template>
 
@@ -27,9 +54,49 @@ export default {
         this.$store.commit('updateResults', value)
       },
     },
+    averageTotal () {
+      return this.$store.getters.averageTotal || 0
+    },
+    averageHemi () {
+      return this.$store.getters.averageHemi || 0
+    },
+    finished () {
+      return this.$store.state.results.total.length === this.$store.state.parameters.trials
+    },
+    completed () {
+      return this.$store.state.results.total.length
+    },
+    trials () {
+      return this.$store.state.parameters.trials
+    },
+    progress () {
+      return ((this.$store.state.results.total.length / this.$store.state.parameters.trials) * 100).toFixed(1)
+    },
+    significant () {
+      const criteria = this.$store.state.parameters.clinicalSignificance
+      const significance = Math.abs(this.averageTotal - this.averageHemi) / Math.max(this.averageTotal, this.averageHemi)
+      return significance > criteria
+    },
+    better () {
+      return this.averageTotal > this.averageHemi ? "Total" : "Hemi"
+    },
   },
 }
 </script>
 
 <style scoped>
+.results-flex {
+  display: flex;
+}
+.results-flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+  margin-right: 1rem;
+}
 </style>

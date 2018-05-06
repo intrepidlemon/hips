@@ -8,8 +8,8 @@
     <div class="main">
       <Points/>
       <div class="x">
-        <div v-if="averageTotal !== null"><strong>total</strong>: {{ averageTotal.toFixed(2) }} average</div>
-        <div v-if="averageTotal !== null"><strong>hemi</strong>: {{ averageHemi.toFixed(2) }} average</div>
+        <div v-if="averageTotal !== null"><strong>total</strong></div>
+        <div v-if="averageTotal !== null"><strong>hemi</strong></div>
       </div>
     </div>
   </div>
