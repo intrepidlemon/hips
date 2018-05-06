@@ -8,7 +8,7 @@
     />
     <sui-modal v-model="open" closeIcon>
       <sui-modal-content>
-        <FieldExplanation :entry="entry"/>
+        <FieldExplanation v-if="open" :entry="entry"/>
       </sui-modal-content>
     </sui-modal>
   </span>
