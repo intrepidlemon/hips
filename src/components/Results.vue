@@ -1,12 +1,9 @@
 <template>
   <div
     id="results"
-    v-on:click="close"
->
-    <Runner/>
-    <div class="interior">
-      <Visualize/>
-    </div>
+  >
+    <Runner v-if="showResults"/>
+    <Visualize/>
   </div>
 </template>
 
@@ -20,49 +17,19 @@ export default {
     Visualize,
     Runner,
   },
-  methods: {
-    close () {
-      this.$store.commit('updateResults', false)
+
+  computed: {
+    showResults: {
+      get () {
+        return this.$store.state.ui.showResults
+      },
+      set (value) {
+        this.$store.commit('updateResults', value)
+      },
     },
   },
 }
 </script>
 
 <style scoped>
-#results {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100vw;
-  box-sizing: border-box;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  margin: 0;
-}
-.interior {
-  max-width: 95vh;
-  max-height: 90vh;
-  width: 100%;
-  background: white;
-  padding: 1.5rem;
-  box-sizing: border-box;
-  border-radius: 0.2rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-h1 {
-  margin: 0;
-  text-align: center;
-  margin-right: 1.5rem;
-}
-.averages {
-  display: flex;
-}
 </style>

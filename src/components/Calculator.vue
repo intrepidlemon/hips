@@ -3,7 +3,11 @@
     <h1>Calculator 💃</h1>
     <Parameters/>
     <sui-button primary v-on:click="run">Calculate</sui-button>
-    <Results v-if="showResults"/>
+    <sui-modal v-model="showResults" closeIcon>
+      <sui-modal-content>
+        <Results/>
+      </sui-modal-content>
+    </sui-modal>
   </sui-container>
 </template>
 
@@ -45,7 +49,7 @@ export default {
     align-items: flex-start;
     height: auto;
     min-height: 100%;
-    margin: 1rem;
+    padding: 1rem;
   }
   #calculator > * {
     flex-shrink: 0;

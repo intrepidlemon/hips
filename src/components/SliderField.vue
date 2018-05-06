@@ -2,6 +2,8 @@
   <div class="slider-field">
     <div class="slider-field__input">
       <input
+        inputmode="numeric"
+        pattern="[0-9]*"
         :min='min'
         :max='max'
         v-model.number='inputVal'

@@ -1,103 +1,97 @@
 <template>
   <sui-form id="parameters">
-    <sui-form-field>
-      <label>expected years left to live</label>
-      <slider-field min="1" max="120" v-model="years"/>
-    </sui-form-field>
-    <sui-menu :widths="3">
-      <sui-menu-item
-        @click="discount = 'none'"
-        :active="discount === 'none'"
-      >
-        no discounting
-      </sui-menu-item>
-      <sui-menu-item
-        @click="discount = 'hyperbolic'"
-        :active="discount === 'hyperbolic'"
-      >
-        hyperbolic
-      </sui-menu-item>
-      <sui-menu-item
-        @click="discount = 'modified-hyperbolic'"
-        :active="discount === 'modified-hyperbolic'"
-      >
-        modified hyperbolic
-      </sui-menu-item>
-    </sui-menu>
-
     <sui-card>
       <sui-card-content>
-
-        <sui-menu :widths="3">
-          <sui-menu-item
-            @click="totalSuccess = 100; hemiSuccess = 100"
-            :active="totalSuccess === 100 && hemiSuccess === 100"
-          >
-            standard patient
-          </sui-menu-item>
-          <sui-menu-item
-            @click="totalSuccess = 100; hemiSuccess = 90"
-            :active="totalSuccess === 100 && hemiSuccess === 90"
-          >
-            high demand patient
-          </sui-menu-item>
-          <sui-menu-item
-            @click="totalSuccess = 100; hemiSuccess = 80"
-            :active="totalSuccess === 100 && hemiSuccess === 80"
-          >
-            very high demand patient
-          </sui-menu-item>
-        </sui-menu>
+        <h3 is="sui-header">Patient</h3>
 
         <div class="section">
           <sui-form-field>
-            <label>total success utility</label>
-            <slider-field min="0" max="200" v-model="totalSuccess"/>
-          </sui-form-field>
-          <sui-form-field>
-            <label>hemi success utility</label>
-            <slider-field min="0" max="200" v-model="hemiSuccess"/>
+            <label>expected years left to live</label>
+            <slider-field min="1" max="120" v-model="years"/>
           </sui-form-field>
         </div>
 
         <div class="section">
-          <sui-form-field>
-            <label>dislocation utility penalty</label>
-            <slider-field min="0" max="100" v-model="dislocation"/>
-          </sui-form-field>
-          <sui-form-field>
-            <label>failure utility penalty</label>
-            <slider-field min="0" max="100" v-model="failure"/>
-          </sui-form-field>
+          <sui-menu :widths="3">
+            <sui-menu-item
+              @click="discount = 'none'"
+              :active="discount === 'none'"
+            >
+              no discounting
+            </sui-menu-item>
+            <sui-menu-item
+              @click="discount = 'hyperbolic'"
+              :active="discount === 'hyperbolic'"
+            >
+              hyperbolic
+            </sui-menu-item>
+            <sui-menu-item
+              @click="discount = 'modified-hyperbolic'"
+              :active="discount === 'modified-hyperbolic'"
+            >
+              modified hyperbolic
+            </sui-menu-item>
+          </sui-menu>
         </div>
 
+        <div class="section">
+          <sui-menu :widths="3">
+            <sui-menu-item
+              @click="totalSuccess = 100; hemiSuccess = 100"
+              :active="totalSuccess === 100 && hemiSuccess === 100"
+            >
+              standard patient
+            </sui-menu-item>
+            <sui-menu-item
+              @click="totalSuccess = 100; hemiSuccess = 90"
+              :active="totalSuccess === 100 && hemiSuccess === 90"
+            >
+              high demand patient
+            </sui-menu-item>
+            <sui-menu-item
+              @click="totalSuccess = 100; hemiSuccess = 75"
+              :active="totalSuccess === 100 && hemiSuccess === 75"
+            >
+              very high demand patient
+            </sui-menu-item>
+          </sui-menu>
+        </div>
+
+        <sui-accordion>
+          <a is="sui-accordion-title">
+            <sui-icon name="dropdown" />
+            Advanced
+          </a>
+          <sui-accordion-content>
+            <div class="section">
+              <sui-form-field>
+                <label>total success utility</label>
+                <slider-field min="0" max="200" v-model="totalSuccess"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>hemi success utility</label>
+                <slider-field min="0" max="200" v-model="hemiSuccess"/>
+              </sui-form-field>
+            </div>
+
+            <div class="section">
+              <sui-form-field>
+                <label>dislocation utility penalty</label>
+                <slider-field min="0" max="100" v-model="dislocation"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>failure utility penalty</label>
+                <slider-field min="0" max="100" v-model="failure"/>
+              </sui-form-field>
+            </div>
+          </sui-accordion-content>
+        </sui-accordion>
       </sui-card-content>
     </sui-card>
 
     <sui-card>
       <sui-card-content>
-
-        <div class="section">
-          <sui-form-field>
-            <label>total longetivity in years</label>
-            <slider-field min="0" max="120" v-model="totalLongetivityYears"/>
-          </sui-form-field>
-          <sui-form-field>
-            <label>hemi longetivity in years</label>
-            <slider-field min="0" max="120" v-model="hemiLongetivityYears"/>
-          </sui-form-field>
-        </div>
-
-        <div class="section">
-          <sui-form-field>
-            <label>total longetivity percent survive</label>
-            <slider-field min="0" max="1" step="0.01" v-model="totalLongetivityPercent"/>
-          </sui-form-field>
-          <sui-form-field>
-            <label>hemi longetivity percent survive</label>
-            <slider-field min="0" max="1" step="0.01" v-model="hemiLongetivityPercent"/>
-          </sui-form-field>
-        </div>
+        <h3 is="sui-header">Device</h3>
 
         <div class="section">
           <sui-form-field>
@@ -105,6 +99,36 @@
             <slider-field min="0" max="1" step="0.01" v-model="totalDislocationRate"/>
           </sui-form-field>
         </div>
+
+        <div class="section">
+          <sui-form-field>
+            <label>total longevity in years</label>
+            <slider-field min="0" max="120" v-model="totalLongetivityYears"/>
+          </sui-form-field>
+          <sui-form-field>
+            <label>hemi longevity in years</label>
+            <slider-field min="0" max="120" v-model="hemiLongetivityYears"/>
+          </sui-form-field>
+        </div>
+
+        <sui-accordion>
+          <a is="sui-accordion-title">
+            <sui-icon name="dropdown" />
+            Advanced
+          </a>
+          <sui-accordion-content>
+            <div class="section">
+              <sui-form-field>
+                <label>total longevity percent survive</label>
+                <slider-field min="0" max="1" step="0.01" v-model="totalLongetivityPercent"/>
+              </sui-form-field>
+              <sui-form-field>
+                <label>hemi longevity percent survive</label>
+                <slider-field min="0" max="1" step="0.01" v-model="hemiLongetivityPercent"/>
+              </sui-form-field>
+            </div>
+          </sui-accordion-content>
+        </sui-accordion>
 
       </sui-card-content>
     </sui-card>

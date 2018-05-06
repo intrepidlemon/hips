@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+
 import parameters from './modules/parameters'
 import results from './modules/results'
 import ui from './modules/ui'
+import settings from './modules/settings'
 
 Vue.use(Vuex)
 
@@ -13,6 +16,14 @@ export default new Vuex.Store({
     parameters,
     results,
     ui,
+    settings,
   },
+  plugins: [createPersistedState({
+    key: 'hips-vuex',
+    paths: [
+      'parameters',
+      'settings',
+    ],
+  })],
   strict: debug,
 })
