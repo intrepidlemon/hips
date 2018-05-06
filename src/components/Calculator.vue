@@ -22,6 +22,7 @@
 import Parameters from './Parameters.vue'
 import Results from './Results.vue'
 import Wizard from './Wizard.vue'
+import FieldExplanation from './FieldExplanation.vue'
 
 export default {
   name: 'Calculator',
@@ -30,6 +31,7 @@ export default {
     Parameters,
     Results,
     Wizard,
+    FieldExplanation,
   },
 
   computed: {

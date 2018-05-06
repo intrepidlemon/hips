@@ -6,55 +6,70 @@
 
         <div class="section">
           <sui-form-field>
-            <label>expected years left to live</label>
+            <label>
+              expected years left to live
+              <ExplanationIndicator :entry="content['life-expectancy']"/>
+            </label>
             <slider-field min="1" max="120" v-model="years"/>
           </sui-form-field>
         </div>
 
         <div class="section">
-          <sui-menu :widths="3">
-            <sui-menu-item
-              @click="discount = 'none'"
-              :active="discount === 'none'"
-            >
-              no discounting
-            </sui-menu-item>
-            <sui-menu-item
-              @click="discount = 'hyperbolic'"
-              :active="discount === 'hyperbolic'"
-            >
-              hyperbolic
-            </sui-menu-item>
-            <sui-menu-item
-              @click="discount = 'modified-hyperbolic'"
-              :active="discount === 'modified-hyperbolic'"
-            >
-              modified hyperbolic
-            </sui-menu-item>
-          </sui-menu>
+          <sui-form-field>
+            <label>
+              utility decay rate
+              <ExplanationIndicator :entry="content['utility-decay-rate']"/>
+            </label>
+            <sui-menu :widths="3">
+              <sui-menu-item
+                @click="discount = 'none'"
+                :active="discount === 'none'"
+              >
+                no discounting
+              </sui-menu-item>
+              <sui-menu-item
+                @click="discount = 'hyperbolic'"
+                :active="discount === 'hyperbolic'"
+              >
+                hyperbolic
+              </sui-menu-item>
+              <sui-menu-item
+                @click="discount = 'modified-hyperbolic'"
+                :active="discount === 'modified-hyperbolic'"
+              >
+                modified hyperbolic
+              </sui-menu-item>
+            </sui-menu>
+          </sui-form-field>
         </div>
 
         <div class="section">
-          <sui-menu :widths="3">
-            <sui-menu-item
-              @click="totalSuccess = 100; hemiSuccess = 100"
-              :active="totalSuccess === 100 && hemiSuccess === 100"
-            >
-              standard patient
-            </sui-menu-item>
-            <sui-menu-item
-              @click="totalSuccess = 100; hemiSuccess = 90"
-              :active="totalSuccess === 100 && hemiSuccess === 90"
-            >
-              high demand patient
-            </sui-menu-item>
-            <sui-menu-item
-              @click="totalSuccess = 100; hemiSuccess = 75"
-              :active="totalSuccess === 100 && hemiSuccess === 75"
-            >
-              very high demand patient
-            </sui-menu-item>
-          </sui-menu>
+          <sui-form-field>
+            <label>
+              patient temperament
+              <ExplanationIndicator :entry="content['patient-temperament']"/>
+            </label>
+            <sui-menu :widths="3">
+              <sui-menu-item
+                @click="totalSuccess = 100; hemiSuccess = 100"
+                :active="totalSuccess === 100 && hemiSuccess === 100"
+              >
+                standard patient
+              </sui-menu-item>
+              <sui-menu-item
+                @click="totalSuccess = 100; hemiSuccess = 90"
+                :active="totalSuccess === 100 && hemiSuccess === 90"
+              >
+                high demand patient
+              </sui-menu-item>
+              <sui-menu-item
+                @click="totalSuccess = 100; hemiSuccess = 75"
+                :active="totalSuccess === 100 && hemiSuccess === 75"
+              >
+                very high demand patient
+              </sui-menu-item>
+            </sui-menu>
+          </sui-form-field>
         </div>
 
         <sui-accordion>
@@ -65,22 +80,34 @@
           <sui-accordion-content>
             <div class="section">
               <sui-form-field>
-                <label>total success utility</label>
+                <label>
+                  total success utility
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
                 <slider-field min="0" max="200" v-model="totalSuccess"/>
               </sui-form-field>
               <sui-form-field>
-                <label>hemi success utility</label>
+                <label>
+                  hemi success utility
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
                 <slider-field min="0" max="200" v-model="hemiSuccess"/>
               </sui-form-field>
             </div>
 
             <div class="section">
               <sui-form-field>
-                <label>dislocation utility penalty</label>
+                <label>
+                  dislocation utility penalty
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
                 <slider-field min="0" max="100" v-model="dislocation"/>
               </sui-form-field>
               <sui-form-field>
-                <label>failure utility penalty</label>
+                <label>
+                  failure utility penalty
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
                 <slider-field min="0" max="100" v-model="failure"/>
               </sui-form-field>
             </div>
@@ -95,18 +122,27 @@
 
         <div class="section">
           <sui-form-field>
-            <label>total dislocation rate above hemi dislocation rate</label>
+            <label>
+              total dislocation rate above hemi dislocation rate
+              <ExplanationIndicator :entry="content['dislocation-rates']"/>
+            </label>
             <slider-field min="0" max="1" step="0.01" v-model="totalDislocationRate"/>
           </sui-form-field>
         </div>
 
         <div class="section">
           <sui-form-field>
-            <label>total longevity in years</label>
+            <label>
+              total longevity in years
+              <ExplanationIndicator :entry="content['device-longevity']"/>
+            </label>
             <slider-field min="0" max="120" v-model="totalLongetivityYears"/>
           </sui-form-field>
           <sui-form-field>
-            <label>hemi longevity in years</label>
+            <label>
+              hemi longevity in years
+              <ExplanationIndicator :entry="content['device-longevity']"/>
+            </label>
             <slider-field min="0" max="120" v-model="hemiLongetivityYears"/>
           </sui-form-field>
         </div>
@@ -119,11 +155,17 @@
           <sui-accordion-content>
             <div class="section">
               <sui-form-field>
-                <label>total longevity percent survive</label>
+                <label>
+                  total longevity percent survive
+                  <ExplanationIndicator :entry="content['device-longevity-percent-survive']"/>
+                </label>
                 <slider-field min="0" max="1" step="0.01" v-model="totalLongetivityPercent"/>
               </sui-form-field>
               <sui-form-field>
-                <label>hemi longevity percent survive</label>
+                <label>
+                  hemi longevity percent survive
+                  <ExplanationIndicator :entry="content['device-longevity-percent-survive']"/>
+                </label>
                 <slider-field min="0" max="1" step="0.01" v-model="hemiLongetivityPercent"/>
               </sui-form-field>
             </div>
@@ -134,7 +176,10 @@
     </sui-card>
 
     <sui-form-field>
-      <label>clinical significance</label>
+      <label>
+        clinical significance
+        <ExplanationIndicator :entry="content['clinical-significance']"/>
+      </label>
       <slider-field min="0" max="1" step="0.01" v-model="clinicalSignificance"/>
     </sui-form-field>
   </sui-form>
@@ -142,12 +187,17 @@
 
 <script>
 import SliderField from './SliderField.vue'
+import ExplanationIndicator from './ExplanationIndicator.vue'
+
+import content from '@/assets/contentful.json'
 
 export default {
   name: 'Parameters',
   components: {
     SliderField,
+    ExplanationIndicator,
   },
+
   computed: {
     years: {
       get () {
@@ -255,6 +305,10 @@ export default {
         this.$store.commit('updateClinicalSignificance', value)
       },
     },
+  },
+
+  created: function () {
+    this.content = content
   },
 }
 </script>
