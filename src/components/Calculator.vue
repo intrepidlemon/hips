@@ -2,12 +2,17 @@
   <sui-container id="calculator" >
     <h1>Calculator 💃</h1>
     <Parameters/>
-    <div class="calculate-button" is="sui-container">
+    <div class="calculate-button">
       <sui-button primary v-on:click="run">Calculate</sui-button>
     </div>
     <sui-modal v-model="showResults" closeIcon>
       <sui-modal-content>
         <Results/>
+      </sui-modal-content>
+    </sui-modal>
+    <sui-modal v-model="showWizard" closeIcon>
+      <sui-modal-content>
+        <Wizard/>
       </sui-modal-content>
     </sui-modal>
   </sui-container>
@@ -16,6 +21,7 @@
 <script>
 import Parameters from './Parameters.vue'
 import Results from './Results.vue'
+import Wizard from './Wizard.vue'
 
 export default {
   name: 'Calculator',
@@ -23,6 +29,7 @@ export default {
   components: {
     Parameters,
     Results,
+    Wizard,
   },
 
   computed: {
@@ -32,6 +39,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateResults', value)
+      },
+    },
+    showWizard: {
+      get () {
+        return this.$store.state.settings.showWizard
+      },
+      set (value) {
+        this.$store.commit('updateWizard', value)
       },
     },
   },

@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "contentful-vue": "^1.0.5",
     "jStat": "^1.7.1",
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-vue": "^0.2.8",

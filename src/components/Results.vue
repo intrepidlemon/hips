@@ -22,7 +22,6 @@
             Total and hemi are about the same
           </h3>
         </div>
-        <Visualize/>
       </div>
       <sui-progress
         :state="finished ? 'success' : 'active' "
@@ -30,6 +29,19 @@
         :percent="progress"
         size="tiny"
       />
+      <div class="plot">
+        <sui-accordion>
+          <a is="sui-accordion-title">
+            <sui-icon name="dropdown" />
+            Plot
+          </a>
+          <sui-accordion-content>
+            <div class="visualize">
+              <Visualize/>
+            </div>
+          </sui-accordion-content>
+        </sui-accordion>
+      </div>
     </div>
   </div>
 </template>
@@ -78,7 +90,7 @@ export default {
       return significance > criteria
     },
     better () {
-      return this.averageTotal > this.averageHemi ? "Total" : "Hemi"
+      return this.averageTotal > this.averageHemi ? 'Total' : 'Hemi'
     },
   },
 }
@@ -87,6 +99,7 @@ export default {
 <style scoped>
 .results-flex {
   display: flex;
+  margin-bottom: 1rem;
 }
 .results-flex-center {
   display: flex;
@@ -97,6 +110,23 @@ export default {
   flex-grow: 1;
   flex-shrink: 0;
   overflow: hidden;
-  margin-right: 1rem;
 }
+
+.results-flex-center .statistics {
+  margin: 0;
+  justify-content: center;
+}
+
+.visualize {
+  max-height: 40vh;
+  width: 40vh;
+}
+
+.inner .plot .content.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 </style>
+

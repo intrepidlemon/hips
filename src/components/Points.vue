@@ -3,14 +3,14 @@
     <circle
       v-for="(point, index) in points.total"
       v-bind:key="`${point}-${index}`"
-      r="0.3"
+      r="1"
       v-bind:cx="2+45*jitter[index]"
       v-bind:cy="98 - (point * 95)"
     />
     <circle
       v-for="(point, index) in points.hemi"
       v-bind:key="`${point}-${index}`"
-      r="0.3"
+      r="1"
       v-bind:cx="53 + 45*jitter[index]"
       v-bind:cy="98 - (point * 95)"
     />
