@@ -2,13 +2,12 @@
   <sui-container id="calculator" >
     <h1>Calculator 💃</h1>
     <Parameters/>
-    <sui-button primary v-on:click="all">Calculate</sui-button>
+    <sui-button primary v-on:click="run">Calculate</sui-button>
     <Results v-if="showResults"/>
   </sui-container>
 </template>
 
 <script>
-import { run } from '@/simulation'
 import Parameters from './Parameters.vue'
 import Results from './Results.vue'
 
@@ -32,62 +31,8 @@ export default {
   },
 
   methods: {
-    single: function () {
-      const {
-        years,
-        totalSuccess,
-        hemiSuccess,
-        failure,
-        dislocation,
-        totalLongetivityYears,
-        hemiLongetivityYears,
-        totalLongetivityPercent,
-        hemiLongetivityPercent,
-        totalDislocationRate,
-        hemiDislocationRate,
-        discount,
-      } = this.$store.state.parameters
-      const result = run(
-        years,
-        years / 2,
-        {
-          totalUtils: {
-            success: totalSuccess,
-            failure: failure,
-            dislocation: dislocation,
-            years: totalLongetivityYears,
-          },
-          hemiUtils: {
-            success: hemiSuccess,
-            failure: failure,
-            dislocation: dislocation,
-            years: hemiLongetivityYears,
-          },
-        },
-        {
-          totalLongetivity: {
-            years: totalLongetivityYears,
-            percent: totalLongetivityPercent,
-          },
-          hemiLongetivity: {
-            years: hemiLongetivityYears,
-            percent: hemiLongetivityPercent,
-          },
-        },
-        {
-          totalDislocationRate: totalDislocationRate,
-          hemiDislocationRate: hemiDislocationRate,
-        },
-        discount,
-      )
-      this.$store.commit('pushTotal', result.total)
-      this.$store.commit('pushHemi', result.hemi)
-    },
-    all: function () {
+    run: function () {
       this.showResults = true
-      this.$store.commit('clear')
-      const trials = [ ...Array(this.$store.state.parameters.trials) ]
-      trials.forEach((_, i) => setTimeout(this.single, i * 3))
     },
   },
 }
@@ -100,6 +45,7 @@ export default {
     align-items: flex-start;
     height: auto;
     min-height: 100%;
+    margin: 1rem;
   }
   #calculator > * {
     flex-shrink: 0;

@@ -98,13 +98,17 @@
             <slider-field min="0" max="1" step="0.01" v-model="hemiLongetivityPercent"/>
           </sui-form-field>
         </div>
+
+        <div class="section">
+          <sui-form-field>
+            <label>total dislocation rate above hemi dislocation rate</label>
+            <slider-field min="0" max="1" step="0.01" v-model="totalDislocationRate"/>
+          </sui-form-field>
+        </div>
+
       </sui-card-content>
     </sui-card>
 
-    <sui-form-field>
-      <label>total dislocation rate above hemi dislocation rate</label>
-      <slider-field min="0" max="1" step="0.01" v-model="totalDislocationRate"/>
-    </sui-form-field>
     <sui-form-field>
       <label>clinical significance</label>
       <slider-field min="0" max="1" step="0.01" v-model="clinicalSignificance"/>

@@ -48,7 +48,9 @@ export default {
   }
   .slider-field__slider-input {
     flex-grow: 1;
+    flex-shrink: 1;
     margin-left: 1rem;
+    width: 1rem;
   }
   .slider-field__input {
     flex-shrink: 0;

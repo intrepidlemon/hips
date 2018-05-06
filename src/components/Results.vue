@@ -2,7 +2,8 @@
   <div
     id="results"
     v-on:click="close"
-  >
+>
+    <Runner/>
     <div class="interior">
       <Visualize/>
     </div>
@@ -11,11 +12,13 @@
 
 <script>
 import Visualize from './Visualize.vue'
+import Runner from './Runner.vue'
 
 export default {
   name: 'Results',
   components: {
     Visualize,
+    Runner,
   },
   methods: {
     close () {
