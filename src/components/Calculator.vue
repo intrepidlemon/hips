@@ -74,6 +74,7 @@ export default {
       this.identifier = uuid()
     }
     this.$ma.identify({ userId: this.identifier })
+    this.$ma.setUserProperties({ userId: this.identifier })
   },
 }
 </script>
