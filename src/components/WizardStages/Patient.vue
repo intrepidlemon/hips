@@ -1,9 +1,15 @@
 <template>
   <sui-form id="parameters">
-    <h3 is="sui-header">Patient</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <h3 is="sui-header">Patient functional status</h3>
+    <p>Please select the functional status of your patient</p>
     <div class="section">
       <sui-menu :widths="3">
+        <sui-menu-item
+          @click="totalSuccess = 80; hemiSuccess = 100"
+          :active="totalSuccess === 80 && hemiSuccess === 100"
+        >
+          low demand
+        </sui-menu-item>
         <sui-menu-item
           @click="totalSuccess = 100; hemiSuccess = 100"
           :active="totalSuccess === 100 && hemiSuccess === 100"

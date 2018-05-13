@@ -21,12 +21,10 @@
 </template>
 
 <script>
-import Welcome from './WizardStages/Welcome.vue'
 import LifeExpectancy from './WizardStages/LifeExpectancy.vue'
 import Patient from './WizardStages/Patient.vue'
 
 const stages = [
-  'Welcome',
   'LifeExpectancy',
   'Patient',
 ]
@@ -35,7 +33,6 @@ export default {
   name: 'Wizard',
 
   components: {
-    Welcome,
     LifeExpectancy,
     Patient,
   },
