@@ -3,7 +3,7 @@
     <h3 is="sui-header">Patient functional status</h3>
     <p>Please select the functional status of your patient</p>
     <div class="section">
-      <sui-menu :widths="3">
+      <sui-menu :widths="4">
         <sui-menu-item
           @click="totalSuccess = 80; hemiSuccess = 100"
           :active="totalSuccess === 80 && hemiSuccess === 100"

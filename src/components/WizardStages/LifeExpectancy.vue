@@ -5,7 +5,7 @@
     <div class="section">
       <sui-form-field>
         <label>expected years left to live</label>
-        <slider-field min="1" max="120" v-model="years"/>
+        <slider-field min="1" max="15" v-model="years"/>
       </sui-form-field>
     </div>
   </sui-form>
