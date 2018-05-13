@@ -1,6 +1,6 @@
 <template>
   <sui-container id="calculator" >
-    <h1>Calculator 💃</h1>
+    <h1>Decision Calculator 💃</h1>
     <Parameters/>
     <div class="calculate-button">
       <sui-button primary v-on:click="run">Calculate</sui-button>

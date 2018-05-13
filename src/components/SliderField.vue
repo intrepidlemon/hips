@@ -9,6 +9,9 @@
         v-model.number='inputVal'
       />
     </div>
+    <div v-if="percentage">
+      %
+    </div>
     <input
       class="slider-field__slider-input"
       type='range'
@@ -27,16 +30,30 @@ export default {
     'min',
     'max',
     'step',
+    'percentage',
   ],
   data () {
-    return { inputVal: this.value }
+    if (this.percentage) {
+      return { inputVal: Math.floor(this.value * 100) }
+    }
+    return {
+      inputVal: this.value,
+    }
   },
   watch: {
     inputVal (val) {
-      this.$emit('input', val)
+      if (this.percentage) {
+        this.$emit('input', parseFloat((val / 100).toFixed(2)))
+      } else {
+        this.$emit('input', val)
+      }
     },
     value (val) {
-      this.inputVal = val
+      if (this.percentage) {
+        this.inputVal = Math.floor(val * 100)
+      } else {
+        this.inputVal = val
+      }
     },
   },
 }
@@ -48,6 +65,9 @@ export default {
     align-items: center;
     width: 100%;
   }
+  div.slider-field > * + * {
+    margin-left: 0.5rem;
+  }
   .slider-field__slider-input {
     flex-grow: 1;
     flex-shrink: 1;
@@ -57,5 +77,8 @@ export default {
   .slider-field__input {
     flex-shrink: 0;
     width: 5rem;
+  }
+  .slider-field__input input {
+    text-align: right;
   }
 </style>

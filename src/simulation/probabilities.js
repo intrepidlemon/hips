@@ -1,5 +1,15 @@
 // totalDislocation returns the probably of dislocation for a total hip replacement
-const totalDislocation = prob => () => prob
+const totalDislocation = (total, hemi, years) => {
+  let i = 0 // is the current year
+  return () => {
+    i += 1
+    if (i < years) {
+      return total
+    } else {
+      return hemi
+    }
+  }
+}
 
 // hemiDislocation returns the probably of dislocation for a total hip replacement
 const hemiDislocation = prob => () => prob
@@ -26,8 +36,8 @@ const failureGenerator = ({ years, percent }) => {
   }
 }
 
-export const dislocation = ({ total, hemi }) => ({
-  total: totalDislocation(total),
+export const dislocation = ({ total, hemi, yearToEqual }) => ({
+  total: totalDislocation(total, hemi, yearToEqual),
   hemi: hemiDislocation(hemi),
 })
 

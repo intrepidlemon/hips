@@ -2,12 +2,12 @@
   <sui-form id="parameters">
     <sui-card>
       <sui-card-content>
-        <h3 is="sui-header">Patient</h3>
+        <h3 is="sui-header">Patient information</h3>
 
         <div class="section">
           <sui-form-field>
             <label>
-              expected years left to live
+              life expectancy
               <ExplanationIndicator :entry="content['life-expectancy']"/>
             </label>
             <slider-field min="1" max="15" v-model="years"/>
@@ -15,9 +15,19 @@
         </div>
 
         <div class="section">
+          <sui-form-field class="parameters__toggle">
+            <label>
+              suppress first year increased mortality risk
+              <ExplanationIndicator :entry="content['life-expectancy']"/>
+            </label>
+            <sui-checkbox toggle v-model="suppressFirstYearMortality"/>
+          </sui-form-field>
+        </div>
+
+        <div class="section">
           <sui-form-field>
             <label>
-              utility decay rate
+              utility discounting
               <ExplanationIndicator :entry="content['utility-decay-rate']"/>
             </label>
             <sui-menu :widths="3">
@@ -46,7 +56,7 @@
         <div class="section">
           <sui-form-field>
             <label>
-              patient functionality
+              functional status
               <ExplanationIndicator :entry="content['patient-temperament']"/>
             </label>
             <sui-menu :widths="4">
@@ -88,7 +98,7 @@
             <div class="section">
               <sui-form-field>
                 <label>
-                  total success utility
+                  THA success utility
                   <ExplanationIndicator :entry="content['utilities']"/>
                 </label>
                 <slider-field min="0" max="200" v-model="totalSuccess"/>
@@ -128,44 +138,72 @@
         <sui-accordion>
           <a is="sui-accordion-title">
             <sui-icon name="dropdown" />
-            <h3 class="accordion-header" is="sui-header">Device</h3>
+            <h3 class="accordion-header" is="sui-header">Device information</h3>
           </a>
           <sui-accordion-content>
 
             <div class="section">
               <sui-form-field>
                 <label>
-                  total dislocation rate above hemi dislocation rate
+                  dislocation rate above hemi dislocation rate of THA
                   <ExplanationIndicator :entry="content['dislocation-rates']"/>
                 </label>
-                <slider-field min="0" max="0.20" step="0.01" v-model="totalDislocationRate"/>
+                <slider-field
+                  min="0"
+                  max="20"
+                  step="1"
+                  v-model="totalDislocationRate"
+                  :percentage="true"
+                  />
               </sui-form-field>
+              <sui-form-field>
+                <label>
+                  year THA dislocation rate falls to hemi dislocation rate
+                  <ExplanationIndicator :entry="content['dislocation-rates']"/>
+                </label>
+                <slider-field
+                  min="0"
+                  max="15"
+                  step="1"
+                  v-model="yearTotalDislocationEquals"
+                  />
+              </sui-form-field>
+
+            </div>
+
+            <div class="section">
             </div>
 
             <div class="section">
               <sui-form-field>
                 <label>
-                  total longevity in years
+                  THA longevity in years
                   <ExplanationIndicator :entry="content['device-longevity']"/>
                 </label>
-                <slider-field min="0" max="120" v-model="totalLongetivityYears"/>
+                <slider-field min="1" max="120" v-model="totalLongetivityYears"/>
               </sui-form-field>
               <sui-form-field>
                 <label>
                   hemi longevity in years
                   <ExplanationIndicator :entry="content['device-longevity']"/>
                 </label>
-                <slider-field min="0" max="120" v-model="hemiLongetivityYears"/>
+                <slider-field min="1" max="120" v-model="hemiLongetivityYears"/>
               </sui-form-field>
             </div>
 
             <div class="section">
               <sui-form-field>
                 <label>
-                  proportion survive
+                  device survival at "longevity"
                   <ExplanationIndicator :entry="content['device-longevity-percent-survive']"/>
                 </label>
-                <slider-field min="0" max="1" step="0.01" v-model="longetivityPercent"/>
+                <slider-field
+                  min="0"
+                  max="100"
+                  step="1"
+                  :percentage="true"
+                  v-model="longetivityPercent"
+                />
               </sui-form-field>
             </div>
           </sui-accordion-content>
@@ -173,14 +211,46 @@
 
       </sui-card-content>
     </sui-card>
+    <sui-card>
+      <sui-card-content>
+        <sui-accordion>
+          <a is="sui-accordion-title">
+            <sui-icon name="dropdown" />
+            <h3 class="accordion-header" is="sui-header">Calculator features</h3>
+          </a>
+          <sui-accordion-content>
 
-    <sui-form-field>
-      <label>
-        clinical significance
-        <ExplanationIndicator :entry="content['clinical-significance']"/>
-      </label>
-      <slider-field min="0" max="0.20" step="0.01" v-model="clinicalSignificance"/>
-    </sui-form-field>
+            <div class="section">
+              <sui-form-field>
+                <label>
+                  minimal clinically important difference
+                  <ExplanationIndicator :entry="content['clinical-significance']"/>
+                </label>
+                <slider-field
+                  min="1"
+                  max="20"
+                  step="1"
+                  v-model="clinicalSignificance"
+                  :percentage="true"
+                  />
+              </sui-form-field>
+            </div>
+
+            <div class="section">
+              <sui-form-field>
+                <label>
+                  simulator iterations
+                  <ExplanationIndicator :entry="content['trials']"/>
+                </label>
+                <slider-field min="100" max="1000" step="10" v-model="trials"/>
+              </sui-form-field>
+            </div>
+
+          </sui-accordion-content>
+        </sui-accordion>
+
+      </sui-card-content>
+    </sui-card>
   </sui-form>
 </template>
 
@@ -274,11 +344,11 @@ export default {
     totalDislocationRate: {
       get () {
         const { totalDislocationRate, hemiDislocationRate } = this.$store.state.parameters
-        return totalDislocationRate - hemiDislocationRate
+        return (totalDislocationRate - hemiDislocationRate).toFixed(2)
       },
       set (value) {
         const { hemiDislocationRate } = this.$store.state.parameters
-        this.$store.commit('updateTotalDislocationRate', value + hemiDislocationRate)
+        this.$store.commit('updateTotalDislocationRate', (value + hemiDislocationRate).toFixed(2))
       },
     },
     discount: {
@@ -295,6 +365,30 @@ export default {
       },
       set (value) {
         this.$store.commit('updateClinicalSignificance', value)
+      },
+    },
+    trials: {
+      get () {
+        return this.$store.state.parameters.trials
+      },
+      set (value) {
+        this.$store.commit('updateTrials', value)
+      },
+    },
+    yearTotalDislocationEquals: {
+      get () {
+        return this.$store.state.parameters.yearTotalDislocationEquals
+      },
+      set (value) {
+        this.$store.commit('updateYearTotalDislocationEquals', value)
+      },
+    },
+    suppressFirstYearMortality: {
+      get () {
+        return !this.$store.state.parameters.emphasizeFirstYearMortality
+      },
+      set (value) {
+        this.$store.commit('updateEmphasizeFirstYearMortality', !value)
       },
     },
   },
@@ -351,4 +445,16 @@ export default {
   .accordion-header {
     display: inline;
   }
+
+  #parameters .section .parameters__toggle {
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-direction: row;
+    display: flex;
+  }
+
+  #parameters .section .parameters__toggle > * + * {
+    margin-left: 0.5rem;
+  }
+
 </style>

@@ -8,16 +8,17 @@ export const run = (
   std,
   { totalUtils, hemiUtils },
   { totalLongetivity, hemiLongetivity },
-  { totalDislocationRate, hemiDislocationRate },
+  { totalDislocationRate, hemiDislocationRate, yearTotalDislocationEquals },
   discount,
+  emphasizeFirstYearMortality,
 ) => {
-  if (Math.random() > 0.2) {
-    years = Math.max(normalize({ mean: years, std: std }), 1)
-  } else {
+  if (emphasizeFirstYearMortality && Math.random() < 0.2) {
     years = 1
+  } else {
+    years = Math.max(normalize({ mean: years, std: std }), 1)
   }
 
-  const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate })
+  const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate, yearToEqual: yearTotalDislocationEquals })
   const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity })
 
   let totalDiscount = () => 1

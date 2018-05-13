@@ -38,7 +38,10 @@ export default {
         totalDislocationRate,
         hemiDislocationRate,
         discount,
+        yearTotalDislocationEquals,
+        emphasizeFirstYearMortality,
       } = this.$store.state.parameters
+
       const result = run(
         years,
         years / 2,
@@ -67,10 +70,12 @@ export default {
           },
         },
         {
-          totalDislocationRate: totalDislocationRate,
-          hemiDislocationRate: hemiDislocationRate,
+          totalDislocationRate,
+          hemiDislocationRate,
+          yearTotalDislocationEquals,
         },
         discount,
+        emphasizeFirstYearMortality,
       )
       this.$store.commit('pushTotal', result.total)
       this.$store.commit('pushHemi', result.hemi)

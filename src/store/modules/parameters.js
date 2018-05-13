@@ -1,4 +1,4 @@
-const state = {
+const defaultParameters = {
   years: 1,
   relativeValueOfHemi: 0.5,
   totalSuccess: 100,
@@ -9,12 +9,16 @@ const state = {
   totalLongetivityPercent: 0.9,
   hemiLongetivityYears: 6,
   hemiLongetivityPercent: 0.9,
-  hemiDislocationRate: 0.04,
-  totalDislocationRate: 0.14,
+  hemiDislocationRate: 0.05,
+  totalDislocationRate: 0.08,
+  yearTotalDislocationEquals: 15,
   trials: 1000,
   discount: 'none',
   clinicalSignificance: 0.05,
+  emphasizeFirstYearMortality: true,
 }
+
+const state = { ...defaultParameters }
 
 const mutations = {
   updateYears: (state, value) => { state.years = value },
@@ -32,6 +36,9 @@ const mutations = {
   updateTrials: (state, value) => { state.trials = value },
   updateDiscount: (state, value) => { state.discount = value },
   updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
+  updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
+  updateEmphasizeFirstYearMortality: (state, value) => { state.emphasizeFirstYearMortality = value },
+  resetDefaultParameters: (state, value) => { Object.assign(state, defaultParameters) },
 }
 
 export default {
