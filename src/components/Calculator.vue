@@ -10,11 +10,6 @@
         <Results/>
       </sui-modal-content>
     </sui-modal>
-    <sui-modal v-model="showWizard" closeIcon>
-      <sui-modal-content>
-        <Wizard/>
-      </sui-modal-content>
-    </sui-modal>
   </sui-container>
 </template>
 
@@ -23,7 +18,6 @@ import uuid from 'uuid/v4'
 
 import Parameters from './Parameters.vue'
 import Results from './Results.vue'
-import Wizard from './Wizard.vue'
 import FieldExplanation from './FieldExplanation.vue'
 
 export default {
@@ -32,7 +26,6 @@ export default {
   components: {
     Parameters,
     Results,
-    Wizard,
     FieldExplanation,
   },
 
