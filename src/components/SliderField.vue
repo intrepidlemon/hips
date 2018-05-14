@@ -99,5 +99,8 @@ export default {
   }
   .slider-field__input input.error {
     border-color: red;
+    background: red;
+    color: white;
+    font-weight: 900;
   }
 </style>
