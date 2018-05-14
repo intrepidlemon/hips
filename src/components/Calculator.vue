@@ -2,6 +2,16 @@
   <sui-container id="calculator" >
     <h1>Decision Calculator 💃</h1>
     <Parameters/>
+    <transition name="fade">
+      <sui-message
+        v-if="error"
+        header="Error"
+        content="Please check all red boxes above"
+        dismissable
+        negative
+        @dismiss="() => this.error = false"
+      />
+    </transition>
     <div class="calculate-button">
       <sui-button primary v-on:click="run">Calculate</sui-button>
     </div>
@@ -23,10 +33,18 @@ import FieldExplanation from './FieldExplanation.vue'
 export default {
   name: 'Calculator',
 
+  inject: {
+    $validator: '$validator',
+  },
+
   components: {
     Parameters,
     Results,
     FieldExplanation,
+  },
+
+  data () {
+    return { error: false }
   },
 
   computed: {
@@ -58,7 +76,15 @@ export default {
 
   methods: {
     run: function () {
-      this.showResults = true
+      this.error = false
+      this.$validator.validate().then(result => {
+        console.log(result)
+        if (result) {
+          this.showResults = true
+        } else {
+          this.error = true
+        }
+      })
     },
   },
 

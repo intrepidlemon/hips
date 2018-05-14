@@ -10,7 +10,12 @@
               life expectancy
               <ExplanationIndicator :entry="content['life-expectancy']"/>
             </label>
-            <slider-field min="1" max="15" v-model="years"/>
+            <slider-field
+              min="1"
+              max="15"
+              v-model="years"
+              name="years"
+            />
           </sui-form-field>
         </div>
 
@@ -101,14 +106,24 @@
                   THA success utility
                   <ExplanationIndicator :entry="content['utilities']"/>
                 </label>
-                <slider-field min="0" max="200" v-model="totalSuccess"/>
+                <slider-field
+                  min="0"
+                  max="200"
+                  v-model="totalSuccess"
+                  name="total-success"
+                  />
               </sui-form-field>
               <sui-form-field>
                 <label>
                   hemi success utility
                   <ExplanationIndicator :entry="content['utilities']"/>
                 </label>
-                <slider-field min="0" max="200" v-model="hemiSuccess"/>
+                <slider-field
+                  min="0"
+                  max="200"
+                  v-model="hemiSuccess"
+                  name="hemi-success"
+                  />
               </sui-form-field>
             </div>
 
@@ -118,14 +133,24 @@
                   dislocation utility penalty
                   <ExplanationIndicator :entry="content['utilities']"/>
                 </label>
-                <slider-field min="0" max="100" v-model="dislocation"/>
+                <slider-field
+                 min="0"
+                 max="200"
+                 v-model="dislocation"
+                 name="dislocation"
+                 />
               </sui-form-field>
               <sui-form-field>
                 <label>
                   failure utility penalty
                   <ExplanationIndicator :entry="content['utilities']"/>
                 </label>
-                <slider-field min="0" max="100" v-model="failure"/>
+                <slider-field
+                  min="0"
+                  max="200"
+                  v-model="failure"
+                  name="failure"
+                  />
               </sui-form-field>
             </div>
           </sui-accordion-content>
@@ -154,6 +179,7 @@
                   step="1"
                   v-model="totalDislocationRate"
                   :percentage="true"
+                  name="total-dislocation-rate"
                   />
               </sui-form-field>
               <sui-form-field>
@@ -166,6 +192,7 @@
                   max="15"
                   step="1"
                   v-model="yearTotalDislocationEquals"
+                  name="year-total-dislocation-equals"
                   />
               </sui-form-field>
 
@@ -180,14 +207,24 @@
                   THA longevity in years
                   <ExplanationIndicator :entry="content['device-longevity']"/>
                 </label>
-                <slider-field min="1" max="120" v-model="totalLongetivityYears"/>
+                <slider-field
+                  min="1"
+                  max="15"
+                  v-model="totalLongetivityYears"
+                  name="total-longevity-years"
+                  />
               </sui-form-field>
               <sui-form-field>
                 <label>
                   hemi longevity in years
                   <ExplanationIndicator :entry="content['device-longevity']"/>
                 </label>
-                <slider-field min="1" max="120" v-model="hemiLongetivityYears"/>
+                <slider-field
+                  min="1"
+                  max="15"
+                  v-model="hemiLongetivityYears"
+                  name="hemi-longevity-years"
+                  />
               </sui-form-field>
             </div>
 
@@ -203,6 +240,7 @@
                   step="1"
                   :percentage="true"
                   v-model="longetivityPercent"
+                  name="longevity-percent"
                 />
               </sui-form-field>
             </div>
@@ -232,6 +270,7 @@
                   step="1"
                   v-model="clinicalSignificance"
                   :percentage="true"
+                  name="clinical-significance"
                   />
               </sui-form-field>
             </div>
@@ -242,7 +281,13 @@
                   simulator iterations
                   <ExplanationIndicator :entry="content['trials']"/>
                 </label>
-                <slider-field min="100" max="1000" step="10" v-model="trials"/>
+                <slider-field
+                 min="100"
+                 max="1000"
+                 step="10"
+                 v-model="trials"
+                 name="trials"
+                 />
               </sui-form-field>
             </div>
 
@@ -266,7 +311,9 @@ export default {
     SliderField,
     ExplanationIndicator,
   },
-
+  inject: {
+    $validator: '$validator',
+  },
   computed: {
     years: {
       get () {
@@ -344,11 +391,12 @@ export default {
     totalDislocationRate: {
       get () {
         const { totalDislocationRate, hemiDislocationRate } = this.$store.state.parameters
-        return (totalDislocationRate - hemiDislocationRate).toFixed(2)
+        const value = parseFloat((totalDislocationRate - hemiDislocationRate).toFixed(2))
+        return value
       },
       set (value) {
         const { hemiDislocationRate } = this.$store.state.parameters
-        this.$store.commit('updateTotalDislocationRate', (value + hemiDislocationRate).toFixed(2))
+        this.$store.commit('updateTotalDislocationRate', parseFloat((value + hemiDislocationRate).toFixed(2)))
       },
     },
     discount: {

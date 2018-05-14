@@ -3,10 +3,13 @@
     <div class="slider-field__input">
       <input
         inputmode="numeric"
-        pattern="[0-9]*"
+        pattern="\d*"
         :min='min'
         :max='max'
         v-model.number='inputVal'
+        :name='name'
+        v-validate.initial='{ required: true, numeric: true, min_value: 0 }'
+        :class='{ "error": errors.has(name) }'
       />
     </div>
     <div v-if="percentage">
@@ -26,12 +29,16 @@
 <script>
 export default {
   props: [
+    'name',
     'value',
     'min',
     'max',
     'step',
     'percentage',
   ],
+  inject: {
+    $validator: '$validator',
+  },
   data () {
     if (this.percentage) {
       return { inputVal: Math.floor(this.value * 100) }
@@ -42,13 +49,22 @@ export default {
   },
   watch: {
     inputVal (val) {
+      if (Number.isNaN(Number(val))) {
+        this.$emit('input', null)
+        return
+      }
       if (this.percentage) {
-        this.$emit('input', parseFloat((val / 100).toFixed(2)))
+        let value = parseFloat((val / 100).toFixed(2))
+        this.$emit('input', value)
       } else {
         this.$emit('input', val)
       }
     },
     value (val) {
+      if (Number.isNaN(Number(val))) {
+        this.inputVal = null
+        return
+      }
       if (this.percentage) {
         this.inputVal = Math.floor(val * 100)
       } else {
@@ -80,5 +96,8 @@ export default {
   }
   .slider-field__input input {
     text-align: right;
+  }
+  .slider-field__input input.error {
+    border-color: red;
   }
 </style>
