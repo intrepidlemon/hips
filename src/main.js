@@ -21,6 +21,7 @@ Vue.use(VeeValidate, { inject: false })
 Vue.use(VueMultianalytics, {
   modules: {
     mixpanel: { token: process.env.MIXPANEL_TOKEN },
+    segment: { token: process.env.SEGMENT_TOKEN },
   },
 })
 
