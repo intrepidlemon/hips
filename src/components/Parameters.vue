@@ -12,7 +12,7 @@
             </label>
             <slider-field
               min="1"
-              max="15"
+              max="25"
               v-model="years"
               name="years"
             />
@@ -61,7 +61,7 @@
         <div class="section">
           <sui-form-field>
             <label>
-              functional status
+              pre-fracture functional status
               <ExplanationIndicator :entry="content['patient-temperament']"/>
             </label>
             <sui-menu :widths="4">
@@ -75,7 +75,7 @@
                 @click="totalSuccess = 100; hemiSuccess = 100"
                 :active="totalSuccess === 100 && hemiSuccess === 100"
               >
-                standard
+                average
               </sui-menu-item>
               <sui-menu-item
                 @click="totalSuccess = 100; hemiSuccess = 90"
