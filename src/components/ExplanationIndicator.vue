@@ -6,7 +6,12 @@
       size="small"
       name="question circle"
     />
-    <sui-modal v-model="open" closeIcon>
+    <sui-modal
+      v-model="open"
+      closeIcon
+      animationDuration="250"
+      animation="vertical flip"
+      >
       <sui-modal-content>
         <FieldExplanation v-if="open" :entry="entry"/>
       </sui-modal-content>

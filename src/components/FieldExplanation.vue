@@ -1,11 +1,11 @@
 <template>
-  <div class="explanation">
+  <div id="explanation">
     <sui-dimmer v-if="!loaded" active>
       <sui-loader />
     </sui-dimmer>
-    <div v-if="loaded">
+    <div class="explanation__content" v-if="loaded">
       <h2>{{ title }}</h2>
-      <vue-markdown>{{ explanation }}</vue-markdown>
+      <vue-markdown class="explanation__inner-content">{{ explanation }}</vue-markdown>
     </div>
   </div>
 </template>
@@ -53,8 +53,14 @@ export default {
 </script>
 
 <style scoped>
-.explanation {
-  max-height: 90vh;
-  overflow: auto;
-}
+  #explanation {
+    max-height: 90vh;
+    overflow: auto;
+  }
+  #explanation .explanation__content .explanation__inner-content {
+    font-weight: initial !important;
+  }
+  #explanation .explanation__content .explanation__inner-content {
+    line-height: 2.5 !important;
+  }
 </style>

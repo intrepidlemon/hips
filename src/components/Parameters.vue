@@ -23,7 +23,7 @@
           <sui-form-field class="parameters__toggle">
             <label>
               suppress first year increased mortality risk
-              <ExplanationIndicator :entry="content['life-expectancy']"/>
+              <ExplanationIndicator :entry="content['suppress-20']"/>
             </label>
             <sui-checkbox toggle v-model="suppressFirstYearMortality"/>
           </sui-form-field>

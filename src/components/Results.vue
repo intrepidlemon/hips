@@ -4,7 +4,12 @@
     <div class="inner">
       <div class="results-flex">
         <div class="results-flex-center">
-          <h2>Average utility</h2>
+          <h2 v-if="done && significant">
+            {{ better }} is significantly better
+          </h2>
+          <h2 v-if="done && !significant">
+            Total and hemi are about the same
+          </h2>
           <sui-statistics-group>
             <sui-statistic in-group>
               <sui-statistic-label>Total</sui-statistic-label>
@@ -15,12 +20,7 @@
               <sui-statistic-value>{{ averageHemi.toFixed(2) }}</sui-statistic-value>
             </sui-statistic>
           </sui-statistics-group>
-          <h3 v-if="significant">
-            {{ better }} is significantly better
-          </h3>
-          <h3 v-if="!significant">
-            Total and hemi are about the same
-          </h3>
+          <h3>Average utility</h3>
         </div>
       </div>
       <sui-progress
@@ -81,6 +81,9 @@ export default {
     trials () {
       return this.$store.state.parameters.trials
     },
+    done () {
+      return this.completed === this.trials
+    },
     progress () {
       return ((this.$store.state.results.total.length / this.$store.state.parameters.trials) * 100).toFixed(1)
     },
@@ -128,4 +131,11 @@ export default {
   align-items: center;
 }
 
+h3 {
+  margin-top: 0;
+}
+
+h2 {
+  margin-bottom: 4rem;
+}
 </style>
