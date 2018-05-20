@@ -89,7 +89,7 @@ export default {
   },
 
   mounted: function () {
-    if (this.identifier === '') {
+    if (!this.identifier) {
       this.identifier = uuid()
     }
     this.$ma.identify({ userId: this.identifier })
