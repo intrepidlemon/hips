@@ -78,7 +78,6 @@ export default {
     run: function () {
       this.error = false
       this.$validator.validate().then(result => {
-        console.log(result)
         if (result) {
           this.showResults = true
         } else {
