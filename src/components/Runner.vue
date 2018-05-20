@@ -17,6 +17,40 @@ export default {
         this.$store.commit('updateResults', value)
       },
     },
+    finished () {
+      return this.$store.state.results.total.length === this.$store.state.parameters.trials
+    },
+    averageTotal () {
+      return this.$store.getters.averageTotal || 0
+    },
+    averageHemi () {
+      return this.$store.getters.averageHemi || 0
+    },
+    significant () {
+      const criteria = this.$store.state.parameters.clinicalSignificance
+      const significance = Math.abs(this.averageTotal - this.averageHemi) / Math.max(this.averageTotal, this.averageHemi)
+      return significance > criteria
+    },
+    better () {
+      return this.averageTotal > this.averageHemi ? 'Total' : 'Hemi'
+    },
+  },
+
+  watch: {
+    finished (finished, old) {
+      if (old === false && finished === true) {
+        this.$ma.trackEvent({
+          action: 'complete-total-vs-hemi-calculation',
+          properties: {
+            ...this.$store.state.parameters,
+            significant: this.significant,
+            better: this.better,
+            averageTotal: this.averageTotal,
+            averageHemi: this.averageHemi,
+          },
+        })
+      }
+    },
   },
 
   data () {

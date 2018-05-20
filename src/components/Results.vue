@@ -4,10 +4,10 @@
     <div class="inner">
       <div class="results-flex">
         <div class="results-flex-center">
-          <h2 v-if="done && significant">
+          <h2 v-if="finished && significant">
             {{ better }} is significantly better
           </h2>
-          <h2 v-if="done && !significant">
+          <h2 v-if="finished && !significant">
             Total and hemi are about the same
           </h2>
           <sui-statistics-group>
@@ -80,9 +80,6 @@ export default {
     },
     trials () {
       return this.$store.state.parameters.trials
-    },
-    done () {
-      return this.completed === this.trials
     },
     progress () {
       return ((this.$store.state.results.total.length / this.$store.state.parameters.trials) * 100).toFixed(1)

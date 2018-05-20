@@ -94,6 +94,9 @@ export default {
     }
     this.$ma.identify({ userId: this.identifier })
     this.$ma.setUserProperties({ userId: this.identifier })
+    this.$ma.trackEvent({
+      action: 'load-calculator',
+    })
   },
 }
 </script>
