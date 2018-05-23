@@ -161,11 +161,11 @@
     <sui-card>
       <sui-card-content>
         <sui-accordion>
-          <a is="sui-accordion-title">
+          <a is="sui-accordion-title" active>
             <sui-icon name="dropdown" />
             <h3 class="accordion-header" is="sui-header">Device information</h3>
           </a>
-          <sui-accordion-content>
+          <sui-accordion-content active>
 
             <div class="section">
               <sui-form-field>
@@ -252,11 +252,11 @@
     <sui-card>
       <sui-card-content>
         <sui-accordion>
-          <a is="sui-accordion-title">
+          <a is="sui-accordion-title" active>
             <sui-icon name="dropdown" />
             <h3 class="accordion-header" is="sui-header">Calculator features</h3>
           </a>
-          <sui-accordion-content>
+          <sui-accordion-content active>
 
             <div class="section">
               <sui-form-field>
