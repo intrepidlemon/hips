@@ -1,6 +1,7 @@
 <template>
   <sui-container id="calculator" >
-    <h1>Decision Calculator 💃</h1>
+    <h1>Decision Calculator using Monte Carlo Simulation for Treating Geriatric Hip Fracture with Arthroplasty.</h1>
+    <h3>Created by J Bernstein and Ianto Xi</h3>
     <Parameters/>
     <transition name="fade">
       <sui-message
@@ -14,6 +15,9 @@
     </transition>
     <div class="calculate-button">
       <sui-button primary v-on:click="run">Calculate</sui-button>
+    </div>
+    <div class="explanation">
+      <p><a href="/static/2018-NTLW-Bhandari-Paradox.pdf">Why is this calculator important?</a></p>
     </div>
     <sui-modal v-model="showResults" closeIcon>
       <sui-modal-content>
@@ -114,5 +118,18 @@ export default {
   }
   .calculate-button {
     margin-top: 1rem;
+  }
+  #calculator h1 {
+    font-size: 1.8rem;
+  }
+  #calculator h1, #calculator h3 {
+    margin: 0.5rem;
+    line-height: 1.8;
+  }
+  .explanation {
+    margin-top: 1rem;
+  }
+  .explanation a {
+    text-decoration: underline;
   }
 </style>

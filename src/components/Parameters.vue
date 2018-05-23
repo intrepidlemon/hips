@@ -94,11 +94,11 @@
         </div>
 
         <sui-accordion>
-          <a is="sui-accordion-title">
+          <a is="sui-accordion-title" active>
             <sui-icon name="dropdown" />
             Advanced
           </a>
-          <sui-accordion-content>
+          <sui-accordion-content active>
 
             <div class="section">
               <sui-form-field>

@@ -9,7 +9,7 @@
     <sui-modal
       v-model="open"
       closeIcon
-      animationDuration="250"
+      :animationDuration="250"
       animation="vertical flip"
       >
       <sui-modal-content>
