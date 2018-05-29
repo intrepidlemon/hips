@@ -2,7 +2,7 @@ import { parse } from 'json2csv'
 import { run } from './simulation'
 
 // TODO: change to 1000
-const TRIALS = 10
+const TRIALS = 1000
 const DISCOUNT = "no-discounting"
 const TOTAL_SUCCESS = 0
 const HEMI_SUCCESS = 0
@@ -11,7 +11,7 @@ const YEAR_TOTAL_FALLS_TO_HEMI = 100
 const DEVICE_SURVIVAL = 0.9
 const EMPHASIZE_FIRST_YEAR_MORTALITY = true
 
-const LIFE_EXPECTANCIES = [...Array(5).keys()].map(x => x + 1)
+const LIFE_EXPECTANCIES = [...Array(15).keys()].map(x => x + 1)
 const FAILURE_PENALTY = [ 1, 2, 3 ]
 const DISLOCATION_PENALTY = [ 1, 2, 3 ]
 const TOTAL_ADDITIONAL_DISLOCATION_RATE = [ 0.01, 0.02, 0.03 ]
@@ -97,18 +97,28 @@ const functions = LIFE_EXPECTANCIES
   .reduce((all, f) => [...all, ...HEMI_LONGEVITY.map(f)], [])
 
 const execute = () => {
-  console.log(functions.length)
-
   const output = functions.map(f => f())
 
-  const fields = ['total', 'hemi'];
+  const fields = [
+
+    'lifeExpectancy',
+    'failurePenalty',
+    'dislocationPenalty',
+    'totalAdditionalDislocationRate',
+    'totalLongevity',
+    'hemiLongevity',
+
+    'total',
+    'hemi',
+  ]
+
   const opts = { fields };
 
   try {
-    const csv = parse(output, opts);
-    console.log(csv);
+    const csv = parse(output, opts)
+    console.log(csv)
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 }
 
