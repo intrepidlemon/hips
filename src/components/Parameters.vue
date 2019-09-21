@@ -2,8 +2,10 @@
   <sui-form id="parameters">
     <sui-card>
       <sui-card-content>
-        <h3 is="sui-header">Patient information</h3>
-
+        <h3 class="patient-header" is="sui-header">
+          <div>Patient information</div>
+          <sui-button v-on:click="reset">Reset default parameters</sui-button>
+        </h3>
         <div class="section">
           <sui-form-field>
             <label>
@@ -314,6 +316,12 @@ export default {
   inject: {
     $validator: '$validator',
   },
+  methods: {
+    reset: function (e) {
+      e.preventDefault()
+      this.$store.commit('resetDefaultParameters')
+    },
+  },
   computed: {
     years: {
       get () {
@@ -480,6 +488,12 @@ export default {
 
   #parameters .section > * + * {
     margin-left: 1rem;
+  }
+
+  #parameters .patient-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
   }
 
   .menu .item {
