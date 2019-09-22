@@ -172,7 +172,22 @@
             <div class="section">
               <sui-form-field>
                 <label>
-                  dislocation rate above hemi dislocation rate of THA
+                  hemi dislocation rate
+                  <ExplanationIndicator :entry="content['dislocation-rates']"/>
+                </label>
+                <slider-field
+                  min="0"
+                  max="20"
+                  step="1"
+                  v-model="hemiDislocationRate"
+                  :percentage="true"
+                  name="hemi-dislocation-rate"
+                  />
+              </sui-form-field>
+
+              <sui-form-field>
+                <label>
+                  total dislocation rate
                   <ExplanationIndicator :entry="content['dislocation-rates']"/>
                 </label>
                 <slider-field
@@ -184,6 +199,9 @@
                   name="total-dislocation-rate"
                   />
               </sui-form-field>
+            </div>
+
+            <div class="section">
               <sui-form-field>
                 <label>
                   year THA dislocation rate falls to hemi dislocation rate
@@ -197,10 +215,6 @@
                   name="year-total-dislocation-equals"
                   />
               </sui-form-field>
-
-            </div>
-
-            <div class="section">
             </div>
 
             <div class="section">
@@ -396,7 +410,23 @@ export default {
         this.$store.commit('updateHemiLongetivityPercent', value)
       },
     },
+    hemiDislocationRate: {
+      get () {
+        return this.$store.state.parameters.hemiDislocationRate
+      },
+      set (value) {
+        this.$store.commit('updateHemiDislocationRate', value)
+      },
+    },
     totalDislocationRate: {
+      get () {
+        return this.$store.state.parameters.totalDislocationRate
+      },
+      set (value) {
+        this.$store.commit('updateTotalDislocationRate', value)
+      },
+    },
+    differenceDislocationRate: {
       get () {
         const { totalDislocationRate, hemiDislocationRate } = this.$store.state.parameters
         const value = parseFloat((totalDislocationRate - hemiDislocationRate).toFixed(2))
