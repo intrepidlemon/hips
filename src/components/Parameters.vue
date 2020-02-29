@@ -281,7 +281,7 @@
                   <ExplanationIndicator :entry="content['clinical-significance']"/>
                 </label>
                 <slider-field
-                  min="1"
+                  min="0"
                   max="20"
                   step="1"
                   v-model="clinicalSignificance"

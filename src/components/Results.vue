@@ -86,7 +86,7 @@ export default {
     },
     significant () {
       const criteria = this.$store.state.parameters.clinicalSignificance
-      const significance = Math.abs(this.averageTotal - this.averageHemi) / Math.max(this.averageTotal, this.averageHemi)
+      const significance = Math.abs((this.averageTotal - this.averageHemi) / Math.max(this.averageTotal, this.averageHemi))
       return significance > criteria
     },
     better () {
