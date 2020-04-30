@@ -3745,8 +3745,8 @@ jStat@^1.7.1:
   resolved "https://registry.yarnpkg.com/jStat/-/jStat-1.8.5.tgz#e6d44d3a48eaa358d37e34cb8c01035f71d47e17"
 
 jquery@x.*:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
 
 js-base64@^2.1.9:
   version "2.5.1"
