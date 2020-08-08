@@ -19,6 +19,26 @@
               name="years"
             />
           </sui-form-field>
+          <sui-form-field>
+            <label>
+              standard deviation of life expectancy
+              <ExplanationIndicator :entry="content['life-expectancy-std']"/>
+            </label>
+            <sui-menu :widths="2">
+              <sui-menu-item
+                @click="std = 0.5"
+                :active="std === 0.5"
+              >
+                narrow
+              </sui-menu-item>
+              <sui-menu-item
+                @click="std = 1.0"
+                :active="std === 1.0"
+              >
+                wide
+              </sui-menu-item>
+            </sui-menu>
+          </sui-form-field>
         </div>
 
         <div class="section">
@@ -343,6 +363,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateYears', value)
+      },
+    },
+    std: {
+      get () {
+        return this.$store.state.parameters.std
+      },
+      set (value) {
+        this.$store.commit('updateSTD', value)
       },
     },
     relativeValueOfHemi: {

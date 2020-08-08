@@ -61,6 +61,7 @@ export default {
     single: function () {
       const {
         years,
+        std,
         totalSuccess,
         hemiSuccess,
         failure,
@@ -78,7 +79,7 @@ export default {
 
       const result = run(
         years,
-        years / 2,
+        std,
         {
           totalUtils: {
             success: totalSuccess,

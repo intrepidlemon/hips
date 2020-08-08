@@ -1,5 +1,6 @@
 const defaultParameters = {
   years: 1,
+  std: 0.5,
   relativeValueOfHemi: 0.5,
   totalSuccess: 100,
   hemiSuccess: 100,
@@ -22,6 +23,7 @@ const state = { ...defaultParameters }
 
 const mutations = {
   updateYears: (state, value) => { state.years = value },
+  updateSTD: (state, value) => { state.std = value },
   updateRelativeValueOfHemi: (state, value) => { state.relativeValueOfHemi = value },
   updateTotalSuccess: (state, value) => { state.totalSuccess = value },
   updateHemiSuccess: (state, value) => { state.hemiSuccess = value },
