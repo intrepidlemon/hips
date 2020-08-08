@@ -2,14 +2,14 @@
   <svg width="100" height="100" viewBox="-2 0 102 101">
     <circle
       v-for="(point, index) in points.total"
-      v-bind:key="`${point}-${index}`"
+      v-bind:key="`${point}-${index}-total`"
       r="1"
       v-bind:cx="2+45*jitter[index]"
       v-bind:cy="98 - (point * 95)"
     />
     <circle
       v-for="(point, index) in points.hemi"
-      v-bind:key="`${point}-${index}`"
+      v-bind:key="`${point}-${index}-hemi`"
       r="1"
       v-bind:cx="53 + 45*jitter[index]"
       v-bind:cy="98 - (point * 95)"
