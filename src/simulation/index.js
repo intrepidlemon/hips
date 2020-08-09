@@ -10,6 +10,7 @@ export const run = (
   { totalLongetivity, hemiLongetivity },
   { totalDislocationRate, hemiDislocationRate, yearTotalDislocationEquals },
   discount,
+  failureMode,
   emphasizeFirstYearMortality,
 ) => {
   if (emphasizeFirstYearMortality && Math.random() < 0.2) {
@@ -27,7 +28,7 @@ export const run = (
   }
 
   const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate, yearToEqual: yearTotalDislocationEquals })
-  const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity })
+  const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity, mode: failureMode })
 
   let totalDiscount = () => 1
   let hemiDiscount = () => 1

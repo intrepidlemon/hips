@@ -15,6 +15,7 @@ const defaultParameters = {
   yearTotalDislocationEquals: 15,
   trials: 1000,
   discount: 'none',
+  failureMode: 'quadratic',
   clinicalSignificance: 0.05,
   emphasizeFirstYearMortality: true,
 }
@@ -37,6 +38,7 @@ const mutations = {
   updateTotalDislocationRate: (state, value) => { state.totalDislocationRate = value },
   updateTrials: (state, value) => { state.trials = value },
   updateDiscount: (state, value) => { state.discount = value },
+  updateFailureMode: (state, value) => { state.failureMode = value },
   updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
   updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
   updateEmphasizeFirstYearMortality: (state, value) => { state.emphasizeFirstYearMortality = value },

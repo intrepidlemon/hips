@@ -279,6 +279,26 @@
                   name="longevity-percent"
                 />
               </sui-form-field>
+              <sui-form-field>
+                <label>
+                  failure function
+                  <ExplanationIndicator :entry="content['failure-function']"/>
+                </label>
+                <sui-menu :widths="2">
+                  <sui-menu-item
+                    @click="failureMode = 'quadratic'"
+                    :active="failureMode === 'quadratic'"
+                  >
+                    quadratic
+                  </sui-menu-item>
+                  <sui-menu-item
+                    @click="failureMode = 'linear'"
+                    :active="failureMode === 'linear'"
+                  >
+                    linear
+                  </sui-menu-item>
+                </sui-menu>
+              </sui-form-field>
             </div>
           </sui-accordion-content>
         </sui-accordion>
@@ -471,6 +491,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateDiscount', value)
+      },
+    },
+    failureMode: {
+      get () {
+        return this.$store.state.parameters.failureMode
+      },
+      set (value) {
+        this.$store.commit('updateFailureMode', value)
       },
     },
     clinicalSignificance: {

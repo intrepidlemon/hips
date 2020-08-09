@@ -73,6 +73,7 @@ export default {
         totalDislocationRate,
         hemiDislocationRate,
         discount,
+        failureMode,
         yearTotalDislocationEquals,
         emphasizeFirstYearMortality,
       } = this.$store.state.parameters
@@ -110,6 +111,7 @@ export default {
           yearTotalDislocationEquals,
         },
         discount,
+        failureMode,
         emphasizeFirstYearMortality,
       )
       this.$store.commit('pushTotal', result.total)
