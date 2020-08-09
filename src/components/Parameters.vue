@@ -19,6 +19,26 @@
               name="years"
             />
           </sui-form-field>
+          <sui-form-field>
+            <label>
+              standard deviation of life expectancy
+              <ExplanationIndicator :entry="content['life-expectancy-std']"/>
+            </label>
+            <sui-menu :widths="2">
+              <sui-menu-item
+                @click="std = 0.5"
+                :active="std === 0.5"
+              >
+                narrow
+              </sui-menu-item>
+              <sui-menu-item
+                @click="std = 1.0"
+                :active="std === 1.0"
+              >
+                wide
+              </sui-menu-item>
+            </sui-menu>
+          </sui-form-field>
         </div>
 
         <div class="section">
@@ -96,12 +116,11 @@
         </div>
 
         <sui-accordion>
-          <a is="sui-accordion-title" active>
+          <a is="sui-accordion-title">
             <sui-icon name="dropdown" />
             Advanced
           </a>
-          <sui-accordion-content active>
-
+          <sui-accordion-content>
             <div class="section">
               <sui-form-field>
                 <label>
@@ -163,11 +182,11 @@
     <sui-card>
       <sui-card-content>
         <sui-accordion>
-          <a is="sui-accordion-title" active>
+          <a is="sui-accordion-title">
             <sui-icon name="dropdown" />
             <h3 class="accordion-header" is="sui-header">Device information</h3>
           </a>
-          <sui-accordion-content active>
+          <sui-accordion-content>
 
             <div class="section">
               <sui-form-field>
@@ -259,6 +278,26 @@
                   name="longevity-percent"
                 />
               </sui-form-field>
+              <sui-form-field>
+                <label>
+                  failure function
+                  <ExplanationIndicator :entry="content['failure-function']"/>
+                </label>
+                <sui-menu :widths="2">
+                  <sui-menu-item
+                    @click="failureMode = 'quadratic'"
+                    :active="failureMode === 'quadratic'"
+                  >
+                    quadratic
+                  </sui-menu-item>
+                  <sui-menu-item
+                    @click="failureMode = 'linear'"
+                    :active="failureMode === 'linear'"
+                  >
+                    linear
+                  </sui-menu-item>
+                </sui-menu>
+              </sui-form-field>
             </div>
           </sui-accordion-content>
         </sui-accordion>
@@ -268,11 +307,11 @@
     <sui-card>
       <sui-card-content>
         <sui-accordion>
-          <a is="sui-accordion-title" active>
+          <a is="sui-accordion-title">
             <sui-icon name="dropdown" />
             <h3 class="accordion-header" is="sui-header">Calculator features</h3>
           </a>
-          <sui-accordion-content active>
+          <sui-accordion-content>
 
             <div class="section">
               <sui-form-field>
@@ -343,6 +382,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateYears', value)
+      },
+    },
+    std: {
+      get () {
+        return this.$store.state.parameters.std
+      },
+      set (value) {
+        this.$store.commit('updateSTD', value)
       },
     },
     relativeValueOfHemi: {
@@ -443,6 +490,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateDiscount', value)
+      },
+    },
+    failureMode: {
+      get () {
+        return this.$store.state.parameters.failureMode
+      },
+      set (value) {
+        this.$store.commit('updateFailureMode', value)
       },
     },
     clinicalSignificance: {

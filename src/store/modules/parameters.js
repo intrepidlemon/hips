@@ -1,5 +1,6 @@
 const defaultParameters = {
   years: 1,
+  std: 0.5,
   relativeValueOfHemi: 0.5,
   totalSuccess: 100,
   hemiSuccess: 100,
@@ -14,6 +15,7 @@ const defaultParameters = {
   yearTotalDislocationEquals: 15,
   trials: 1000,
   discount: 'none',
+  failureMode: 'quadratic',
   clinicalSignificance: 0.05,
   emphasizeFirstYearMortality: true,
 }
@@ -22,6 +24,7 @@ const state = { ...defaultParameters }
 
 const mutations = {
   updateYears: (state, value) => { state.years = value },
+  updateSTD: (state, value) => { state.std = value },
   updateRelativeValueOfHemi: (state, value) => { state.relativeValueOfHemi = value },
   updateTotalSuccess: (state, value) => { state.totalSuccess = value },
   updateHemiSuccess: (state, value) => { state.hemiSuccess = value },
@@ -35,6 +38,7 @@ const mutations = {
   updateTotalDislocationRate: (state, value) => { state.totalDislocationRate = value },
   updateTrials: (state, value) => { state.trials = value },
   updateDiscount: (state, value) => { state.discount = value },
+  updateFailureMode: (state, value) => { state.failureMode = value },
   updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
   updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
   updateEmphasizeFirstYearMortality: (state, value) => { state.emphasizeFirstYearMortality = value },

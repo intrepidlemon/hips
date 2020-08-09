@@ -61,6 +61,7 @@ export default {
     single: function () {
       const {
         years,
+        std,
         totalSuccess,
         hemiSuccess,
         failure,
@@ -72,13 +73,14 @@ export default {
         totalDislocationRate,
         hemiDislocationRate,
         discount,
+        failureMode,
         yearTotalDislocationEquals,
         emphasizeFirstYearMortality,
       } = this.$store.state.parameters
 
       const result = run(
         years,
-        years / 2,
+        std,
         {
           totalUtils: {
             success: totalSuccess,
@@ -109,6 +111,7 @@ export default {
           yearTotalDislocationEquals,
         },
         discount,
+        failureMode,
         emphasizeFirstYearMortality,
       )
       this.$store.commit('pushTotal', result.total)
