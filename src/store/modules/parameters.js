@@ -1,4 +1,8 @@
+import { lifeExpectancy } from '@/utils/life'
+
 const defaultParameters = {
+  age: 65,
+  sex: 'female',
   years: 1,
   std: 0.5,
   relativeValueOfHemi: 0.5,
@@ -23,6 +27,8 @@ const defaultParameters = {
 const state = { ...defaultParameters }
 
 const mutations = {
+  updateAge: (state, value) => { state.age = value },
+  updateSex: (state, value) => { state.sex = value },
   updateYears: (state, value) => { state.years = value },
   updateSTD: (state, value) => { state.std = value },
   updateRelativeValueOfHemi: (state, value) => { state.relativeValueOfHemi = value },
@@ -43,6 +49,7 @@ const mutations = {
   updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
   updateEmphasizeFirstYearMortality: (state, value) => { state.emphasizeFirstYearMortality = value },
   resetDefaultParameters: (state, value) => { Object.assign(state, defaultParameters) },
+  calculateLifeExpectancy: (state, value) => { state.years = lifeExpectancy(state.age, state.sex) },
 }
 
 export default {

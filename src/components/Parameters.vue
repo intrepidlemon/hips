@@ -9,6 +9,47 @@
         <div class="section">
           <sui-form-field>
             <label>
+              age
+              <ExplanationIndicator :entry="content['life-expectancy']"/>
+            </label>
+            <slider-field
+              min="65"
+              max="89"
+              v-model="age"
+              name="age"
+            />
+          </sui-form-field>
+          <sui-form-field>
+            <label>
+              sex
+              <ExplanationIndicator :entry="content['life-expectancy-std']"/>
+            </label>
+            <sui-menu :widths="2">
+              <sui-menu-item
+                @click="sex = 'male'"
+                :active="sex === 'male'"
+              >
+                male
+              </sui-menu-item>
+              <sui-menu-item
+                @click="sex = 'female'"
+                :active="sex === 'female'"
+              >
+                female
+              </sui-menu-item>
+            </sui-menu>
+          </sui-form-field>
+          <sui-form-field>
+            <label>
+              calculate life expectancy from age and sex
+              <ExplanationIndicator :entry="content['life-expectancy-std']"/>
+            </label>
+            <sui-button v-on:click="calculateLifeExpectancy">Calculate</sui-button>
+          </sui-form-field>
+        </div>
+        <div class="section">
+          <sui-form-field>
+            <label>
               life expectancy
               <ExplanationIndicator :entry="content['life-expectancy']"/>
             </label>
@@ -374,8 +415,28 @@ export default {
       e.preventDefault()
       this.$store.commit('resetDefaultParameters')
     },
+    calculateLifeExpectancy: function (e) {
+      e.preventDefault()
+      this.$store.commit('calculateLifeExpectancy')
+    },
   },
   computed: {
+    age: {
+      get () {
+        return this.$store.state.parameters.age
+      },
+      set (value) {
+        this.$store.commit('updateAge', value)
+      },
+    },
+    sex: {
+      get () {
+        return this.$store.state.parameters.sex
+      },
+      set (value) {
+        this.$store.commit('updateSex', value)
+      },
+    },
     years: {
       get () {
         return this.$store.state.parameters.years
@@ -591,6 +652,10 @@ export default {
 
   .accordion-header {
     display: inline;
+  }
+
+  .ui .menu {
+    margin: 0;
   }
 
   #parameters .section .parameters__toggle {
