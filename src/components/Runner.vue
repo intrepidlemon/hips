@@ -80,7 +80,7 @@ export default {
 
       const result = run(
         years,
-        std,
+        std * years,
         {
           totalUtils: {
             success: totalSuccess,
