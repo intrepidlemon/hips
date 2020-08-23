@@ -10,7 +10,6 @@
           <sui-form-field>
             <label>
               age
-              <ExplanationIndicator :entry="content['life-expectancy']"/>
             </label>
             <slider-field
               min="65"
@@ -22,7 +21,6 @@
           <sui-form-field>
             <label>
               sex
-              <ExplanationIndicator :entry="content['life-expectancy-std']"/>
             </label>
             <sui-menu :widths="2">
               <sui-menu-item
@@ -42,7 +40,7 @@
           <sui-form-field>
             <label>
               calculate life expectancy from age and sex
-              <ExplanationIndicator :entry="content['life-expectancy-std']"/>
+              <ExplanationIndicator :entry="content['life-expectancy-calculator']"/>
             </label>
             <sui-button v-on:click="calculateLifeExpectancy">Calculate</sui-button>
           </sui-form-field>
