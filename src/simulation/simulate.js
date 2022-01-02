@@ -16,7 +16,7 @@ export const modifiedHyperbolicDiscount = () => {
   }
 }
 
-// simulate is a recursive function that calculates the
+// simulate is a recursive function that calculates the utility
 // of a device year after year
 const simulate = (years, utilities, probabilities, discount) => {
   const {

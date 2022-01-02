@@ -1,4 +1,4 @@
-import { normalize } from './random'
+import { determinedYearsToLive } from './life'
 import simulate, { hyperbolicDiscount, modifiedHyperbolicDiscount } from './simulate'
 import utilities from './utilities'
 import * as probabilities from './probabilities'
@@ -13,19 +13,7 @@ export const run = (
   failureMode,
   emphasizeFirstYearMortality,
 ) => {
-  if (emphasizeFirstYearMortality && Math.random() < 0.2) {
-    years = 1
-  } else {
-    years = normalize({ mean: years, std: std })
-  }
-
-  // if during this round, patient dies, no utility
-  if (years < 0) {
-    return {
-      total: 0.0,
-      hemi: 0.0,
-    }
-  }
+  years = determinedYearsToLive(years)
 
   const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate, yearToEqual: yearTotalDislocationEquals })
   const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity, mode: failureMode })
