@@ -61,16 +61,6 @@
         </div>
 
         <div class="section">
-          <sui-form-field class="parameters__toggle">
-            <label>
-              suppress first year increased mortality risk
-              <ExplanationIndicator :entry="content['suppress-20']"/>
-            </label>
-            <sui-checkbox toggle v-model="suppressFirstYearMortality"/>
-          </sui-form-field>
-        </div>
-
-        <div class="section">
           <sui-form-field>
             <label>
               utility discounting
@@ -553,14 +543,6 @@ export default {
       },
       set (value) {
         this.$store.commit('updateYearTotalDislocationEquals', value)
-      },
-    },
-    suppressFirstYearMortality: {
-      get () {
-        return !this.$store.state.parameters.emphasizeFirstYearMortality
-      },
-      set (value) {
-        this.$store.commit('updateEmphasizeFirstYearMortality', !value)
       },
     },
   },

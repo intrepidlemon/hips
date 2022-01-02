@@ -74,7 +74,6 @@ export default {
         discount,
         failureMode,
         yearTotalDislocationEquals,
-        emphasizeFirstYearMortality,
       } = this.$store.state.parameters
 
       const result = run(
@@ -110,7 +109,6 @@ export default {
         },
         discount,
         failureMode,
-        emphasizeFirstYearMortality,
       )
       this.$store.commit('pushTotal', result.total)
       this.$store.commit('pushHemi', result.hemi)

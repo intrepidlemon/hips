@@ -10,7 +10,6 @@ export const run = (
   { totalDislocationRate, hemiDislocationRate, yearTotalDislocationEquals },
   discount,
   failureMode,
-  emphasizeFirstYearMortality,
 ) => {
   years = determinedYearsToLive(years)
 
