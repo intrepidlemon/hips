@@ -8,7 +8,7 @@
         :max='max'
         v-model.number='inputVal'
         :name='name'
-        v-validate.initial='{ required: true, numeric: true, min_value: 0 }'
+        v-validate.initial='{ required: true, numeric: true, min_value: min, max_value: max }'
         :class='{ "error": errors.has(name) }'
       />
     </div>

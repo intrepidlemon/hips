@@ -53,7 +53,7 @@
             </label>
             <slider-field
               min="1"
-              max="25"
+              max="15"
               v-model="years"
               name="years"
             />
