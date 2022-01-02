@@ -39,7 +39,7 @@
           </sui-form-field>
           <sui-form-field>
             <label>
-              calculate life expectancy from age and sex
+              estimate life expectancy by BLAX rule
               <ExplanationIndicator :entry="content['life-expectancy-calculator']"/>
             </label>
             <sui-button v-on:click="calculateLifeExpectancy">Calculate</sui-button>

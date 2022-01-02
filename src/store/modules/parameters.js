@@ -45,7 +45,7 @@ const mutations = {
   updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
   updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
   resetDefaultParameters: (state, value) => { Object.assign(state, defaultParameters) },
-  calculateLifeExpectancy: (state, value) => { state.years = lifeExpectancy(state.age, state.sex) },
+  calculateLifeExpectancy: (state, value) => { state.years = lifeExpectancy(state.age) },
 }
 
 export default {
