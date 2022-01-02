@@ -32,7 +32,6 @@ const simulate = (years, utilities, probabilities, discount) => {
 
   const pDislocation = dislocationProb()
   const pFailure = failureProb()
-  const pSuccess = 1 - pDislocation - pFailure
 
   let total = 0
   const fUtil = failureUtil()
