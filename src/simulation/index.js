@@ -27,11 +27,16 @@ export const run = (
       totalDiscount = modifiedHyperbolicDiscount()
       hemiDiscount = modifiedHyperbolicDiscount()
       break
+    default:
+      break
   }
 
+  const totalUtility = simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalDiscount)
+  const hemiUtility = simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiDiscount)
+
   return {
-    total: simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalDiscount),
-    hemi: simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiDiscount),
+    total: totalUtility,
+    hemi: hemiUtility,
   }
 }
 

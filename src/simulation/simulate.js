@@ -35,9 +35,16 @@ const simulate = (years, utilities, probabilities, discount) => {
   const pSuccess = 1 - pDislocation - pFailure
 
   let total = 0
-  total += pDislocation * dislocationUtil()
-  total += pFailure * failureUtil()
-  total += pSuccess * successUtil()
+  const fUtil = failureUtil()
+  const dUtil = dislocationUtil()
+  const sUtil = successUtil()
+  if (Math.random() < pFailure) {
+    total += fUtil
+  } else if (Math.random() < pDislocation) {
+    total += dUtil
+  } else {
+    total += sUtil
+  }
 
   total *= discount()
 
