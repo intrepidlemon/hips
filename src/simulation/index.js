@@ -5,7 +5,6 @@ import * as probabilities from './probabilities'
 
 export const run = (
   years,
-  std,
   { totalUtils, hemiUtils },
   { totalLongetivity, hemiLongetivity },
   { totalDislocationRate, hemiDislocationRate, yearTotalDislocationEquals },
