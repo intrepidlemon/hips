@@ -23,7 +23,7 @@
               estimate life expectancy by BLAX rule
               <ExplanationIndicator :entry="content['life-expectancy-calculator']"/>
             </label>
-            <sui-button v-on:click="calculateLifeExpectancy">Calculate</sui-button>
+            <sui-button v-on:click="calculateLifeExpectancy">Estimate</sui-button>
           </sui-form-field>
         </div>
         <div class="section">

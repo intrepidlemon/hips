@@ -14,7 +14,7 @@
       />
     </transition>
     <div class="calculate-button">
-      <sui-button primary v-on:click="run">Estimate</sui-button>
+      <sui-button primary v-on:click="run">Run simulations</sui-button>
     </div>
     <div class="explanation">
       <p><a href="/static/2018-NTLW-Bhandari-Paradox.pdf">Why is this calculator important?</a></p>
