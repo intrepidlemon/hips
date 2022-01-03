@@ -2,7 +2,6 @@ import { lifeExpectancy } from '@/utils/life'
 
 const defaultParameters = {
   age: 65,
-  sex: 'female',
   years: 1,
   relativeValueOfHemi: 0.5,
   totalSuccess: 100,
@@ -26,7 +25,6 @@ const state = { ...defaultParameters }
 
 const mutations = {
   updateAge: (state, value) => { state.age = value },
-  updateSex: (state, value) => { state.sex = value },
   updateYears: (state, value) => { state.years = value },
   updateRelativeValueOfHemi: (state, value) => { state.relativeValueOfHemi = value },
   updateTotalSuccess: (state, value) => { state.totalSuccess = value },

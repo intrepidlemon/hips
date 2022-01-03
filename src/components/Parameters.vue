@@ -20,25 +20,6 @@
           </sui-form-field>
           <sui-form-field>
             <label>
-              sex
-            </label>
-            <sui-menu :widths="2">
-              <sui-menu-item
-                @click="sex = 'male'"
-                :active="sex === 'male'"
-              >
-                male
-              </sui-menu-item>
-              <sui-menu-item
-                @click="sex = 'female'"
-                :active="sex === 'female'"
-              >
-                female
-              </sui-menu-item>
-            </sui-menu>
-          </sui-form-field>
-          <sui-form-field>
-            <label>
               estimate life expectancy by BLAX rule
               <ExplanationIndicator :entry="content['life-expectancy-calculator']"/>
             </label>
@@ -395,14 +376,6 @@ export default {
       },
       set (value) {
         this.$store.commit('updateAge', value)
-      },
-    },
-    sex: {
-      get () {
-        return this.$store.state.parameters.sex
-      },
-      set (value) {
-        this.$store.commit('updateSex', value)
       },
     },
     years: {
