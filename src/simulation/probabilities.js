@@ -18,7 +18,7 @@ const failureFunction = ({ years, percent, mode = 'quadratic' }) => {
   const quadratic = 3 * (1 - percent) / (years ** 3)
   const linear = 2 * (1 - percent) / (years ** 2)
   const constant = (mode === 'quadratic') ? quadratic : linear
-  return year => year ** ((mode === 'quadratic') ? 2 : 1) * constant
+  return year => year ** ((mode === 'quadratic') ? 2 : 1) * constant / 2
 }
 
 // failureGenerator returns the probability of failure for a hip replacement
@@ -30,7 +30,7 @@ const failureGenerator = ({ years, percent }, mode) => {
   let i = 0 // is the current year
   return () => {
     i += 1
-    if (i < years) {
+    if (i <= years) {
       return func(i)
     } else {
       return maxFailure
