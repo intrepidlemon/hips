@@ -70,7 +70,7 @@
           </sui-form-field>
         </div>
 
-        <div class="section">
+        <div class="section hidden">
           <sui-form-field>
             <label>
               pre-fracture functional status
@@ -106,11 +106,11 @@
         </div>
 
         <sui-accordion>
-          <a is="sui-accordion-title">
+          <a class="hidden" is="sui-accordion-title">
             <sui-icon name="dropdown" />
             Advanced
           </a>
-          <sui-accordion-content>
+          <sui-accordion-content active>
             <div class="section">
               <sui-form-field>
                 <label>
@@ -581,6 +581,10 @@ export default {
 
   .ui .menu {
     margin: 0;
+  }
+
+  .hidden {
+    display: none !important;
   }
 
   #parameters .section .parameters__toggle {
