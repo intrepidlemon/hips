@@ -41,7 +41,7 @@
           </sui-form-field>
         </div>
 
-        <div class="section">
+        <div class="section hidden">
           <sui-form-field>
             <label>
               utility discounting
@@ -210,7 +210,7 @@
               </sui-form-field>
             </div>
 
-            <div class="section">
+            <div class="section hidden">
               <sui-form-field>
                 <label>
                   year THA dislocation rate falls to hemi dislocation rate
@@ -268,7 +268,7 @@
                   name="longevity-percent"
                 />
               </sui-form-field>
-              <sui-form-field>
+              <sui-form-field class="hidden">
                 <label>
                   failure function
                   <ExplanationIndicator :entry="content['failure-function']"/>
