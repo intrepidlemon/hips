@@ -34,11 +34,13 @@ const simulate = (years, utilities, probabilities, discount) => {
   const pFailure = failureProb()
 
   let total = 0
+  let failed = false
   const fUtil = failureUtil()
   const dUtil = dislocationUtil()
   const sUtil = successUtil()
   if (Math.random() < pFailure) {
     total += fUtil
+    failed = true
   } else if (Math.random() < pDislocation) {
     total += dUtil
   } else {
@@ -47,7 +49,7 @@ const simulate = (years, utilities, probabilities, discount) => {
 
   total *= discount()
 
-  if (years > 0) {
+  if (years > 0 && !failed) {
     return total + NPV_DISCOUNT * simulate(years - 1, utilities, probabilities, discount)
   }
   return total
