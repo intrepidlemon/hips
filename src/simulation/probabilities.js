@@ -15,6 +15,13 @@ const totalDislocation = (total, hemi, years) => {
 const hemiDislocation = prob => () => prob
 
 const failureFunction = ({ years, percent, mode = 'quadratic' }) => {
+  // constant failure, AKA, X% every year where X = total% failure at longevity/average years to failure
+  if (mode === 'constant') {
+    const perYearRisk = (1.0 - percent) / years
+    return year => perYearRisk
+  }
+
+  // quadratic or linear failure
   const quadratic = 3 * (1 - percent) / (years ** 3)
   const linear = 2 * (1 - percent) / (years ** 2)
   const constant = (mode === 'quadratic') ? quadratic : linear

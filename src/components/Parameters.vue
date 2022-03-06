@@ -331,23 +331,29 @@
                   name="longevity-percent"
                 />
               </sui-form-field>
-              <sui-form-field class="hidden">
+              <sui-form-field>
                 <label>
                   failure function
                   <ExplanationIndicator :entry="content['failure-function']"/>
                 </label>
-                <sui-menu :widths="2">
+                <sui-menu :widths="3">
                   <sui-menu-item
-                    @click="failureMode = 'quadratic'"
-                    :active="failureMode === 'quadratic'"
+                    @click="failureMode = 'constant'"
+                    :active="failureMode === 'constant'"
                   >
-                    quadratic
+                    constant
                   </sui-menu-item>
                   <sui-menu-item
                     @click="failureMode = 'linear'"
                     :active="failureMode === 'linear'"
                   >
                     linear
+                  </sui-menu-item>
+                  <sui-menu-item
+                    @click="failureMode = 'quadratic'"
+                    :active="failureMode === 'quadratic'"
+                  >
+                    quadratic
                   </sui-menu-item>
                 </sui-menu>
               </sui-form-field>
