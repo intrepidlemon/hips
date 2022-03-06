@@ -357,6 +357,26 @@
                   </sui-menu-item>
                 </sui-menu>
               </sui-form-field>
+              <sui-form-field>
+                <label>
+                  device utility consumption
+                  <ExplanationIndicator :entry="content['failure-function']"/>
+                </label>
+                <sui-menu :widths="2">
+                  <sui-menu-item
+                    @click="utilityConsumption = 'linear'"
+                    :active="utilityConsumption === 'linear'"
+                  >
+                    linear
+                  </sui-menu-item>
+                  <sui-menu-item
+                    @click="utilityConsumption = 'quadratic'"
+                    :active="utilityConsumption === 'quadratic'"
+                  >
+                    quadratic
+                  </sui-menu-item>
+                </sui-menu>
+              </sui-form-field>
             </div>
           </sui-accordion-content>
         </sui-accordion>
@@ -593,6 +613,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateFailureMode', value)
+      },
+    },
+    utilityConsumption: {
+      get () {
+        return this.$store.state.parameters.utilityConsumption
+      },
+      set (value) {
+        this.$store.commit('updateUtilityConsumption', value)
       },
     },
     clinicalSignificance: {

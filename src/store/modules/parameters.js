@@ -21,6 +21,7 @@ const defaultParameters = {
   trials: 1000,
   discount: 'none',
   failureMode: 'quadratic',
+  utilityConsumption: 'quadratic',
   clinicalSignificance: 0.05,
   lifeExpectancyDistribution: 'empiric',
 }
@@ -47,6 +48,7 @@ const mutations = {
   updateTrials: (state, value) => { state.trials = value },
   updateDiscount: (state, value) => { state.discount = value },
   updateFailureMode: (state, value) => { state.failureMode = value },
+  updateUtilityConsumption: (state, value) => { state.utilityConsumption = value },
   updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
   updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
   updateLifeExpectancyDistribution: (state, value) => { state.lifeExpectancyDistribution = value },

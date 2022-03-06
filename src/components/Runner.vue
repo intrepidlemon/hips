@@ -77,6 +77,7 @@ export default {
         hemiDislocationRate,
         discount,
         failureMode,
+        utilityConsumption,
         yearTotalDislocationEquals,
       } = this.$store.state.parameters
 
@@ -89,12 +90,14 @@ export default {
             dislocation: dislocation,
             years: totalLongetivityYears,
             immediatePenalty: totalImmediatePenalty,
+            utilityConsumption,
           },
           hemiUtils: {
             success: hemiSuccess,
             failure: failure,
             dislocation: dislocation,
             years: hemiLongetivityYears,
+            utilityConsumption,
           },
         },
         {
