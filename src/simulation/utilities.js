@@ -12,19 +12,27 @@ const discountFunction = ({ years }) => {
 
 // successUtil returns the utility for a success for a year
 // at the end of device longetivity (YEARS), the utility of the device should be discounted to zero
-const successUtil = (maxUtil, years) => {
+// immediatePenalty is only applied the very first run of the curried function. Will apply 0 penalty in subsequent runs
+const successUtil = (maxUtil, years, immediatePenalty) => {
   let util = maxUtil
   const discountFunc = discountFunction({ years })
   let i = 0
   return () => {
-    util -= maxUtil * discountFunc(i)
+    util -= maxUtil * discountFunc(i) - immediatePenalty
     i += 1
+    immediatePenalty = 0
     return Math.max(0, util)
   }
 }
 
-const utilities = ({ success = 100, dislocation = 5, failure = 100, years = 10 }) => ({
-  success: successUtil(success, years),
+const utilities = ({
+  success = 100,
+  dislocation = 5,
+  failure = 100,
+  years = 10,
+  immediatePenalty = 0,
+}) => ({
+  success: successUtil(success, years, immediatePenalty),
   dislocation: dislocationUtil(success, dislocation),
   failure: failureUtil(success, failure),
 })

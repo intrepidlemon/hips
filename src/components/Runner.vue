@@ -65,6 +65,7 @@ export default {
         hemiSuccess,
         failure,
         dislocation,
+        totalImmediatePenalty,
         totalLongetivityYears,
         hemiLongetivityYears,
         totalLongetivityPercent,
@@ -84,6 +85,7 @@ export default {
             failure: failure,
             dislocation: dislocation,
             years: totalLongetivityYears,
+            immediatePenalty: totalImmediatePenalty,
           },
           hemiUtils: {
             success: hemiSuccess,

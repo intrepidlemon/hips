@@ -137,7 +137,20 @@
                   />
               </sui-form-field>
             </div>
-
+            <div class="section">
+              <sui-form-field>
+                <label>
+                 THA immediate penalty
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
+                <slider-field
+                 min="0"
+                 max="200"
+                 v-model="totalImmediatePenalty"
+                 name="total-immediate-penalty"
+                 />
+              </sui-form-field>
+            </div>
             <div class="section">
               <sui-form-field>
                 <label>
@@ -424,6 +437,14 @@ export default {
       },
       set (value) {
         this.$store.commit('updateDislocation', value)
+      },
+    },
+    totalImmediatePenalty: {
+      get () {
+        return this.$store.state.parameters.totalImmediatePenalty
+      },
+      set (value) {
+        this.$store.commit('updateTotalImmediatePenalty', value)
       },
     },
     totalLongetivityYears: {
