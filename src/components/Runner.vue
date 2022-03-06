@@ -66,6 +66,8 @@ export default {
         hemiSuccess,
         failure,
         dislocation,
+        failureEnduringPenalty,
+        dislocationEnduringPenalty,
         totalImmediatePenalty,
         totalLongetivityYears,
         hemiLongetivityYears,
@@ -113,6 +115,8 @@ export default {
         discount,
         failureMode,
         lifeExpectancyDistribution,
+        failureEnduringPenalty,
+        dislocationEnduringPenalty,
       )
       this.$store.commit('pushTotal', result.total)
       this.$store.commit('pushHemi', result.hemi)

@@ -197,6 +197,36 @@
                   />
               </sui-form-field>
             </div>
+            <div class="section">
+              <sui-form-field>
+                <label>
+                  dislocation enduring utility percentage penalty
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
+                <slider-field
+                 min="0"
+                 max="100"
+                 step="1"
+                 v-model="dislocationEnduringPenalty"
+                 name="dislocation-enduring-penalty"
+                 :percentage="true"
+                 />
+              </sui-form-field>
+              <sui-form-field>
+                <label>
+                  failure enduring utility percentage penalty
+                  <ExplanationIndicator :entry="content['utilities']"/>
+                </label>
+                <slider-field
+                  min="0"
+                  max="100"
+                  step="1"
+                  v-model="failureEnduringPenalty"
+                  name="failure-enduring-penalty"
+                  :percentage="true"
+                  />
+              </sui-form-field>
+            </div>
           </sui-accordion-content>
         </sui-accordion>
       </sui-card-content>
@@ -465,6 +495,22 @@ export default {
       },
       set (value) {
         this.$store.commit('updateTotalImmediatePenalty', value)
+      },
+    },
+    dislocationEnduringPenalty: {
+      get () {
+        return this.$store.state.parameters.dislocationEnduringPenalty
+      },
+      set (value) {
+        this.$store.commit('updateDislocationEnduringPenalty', value)
+      },
+    },
+    failureEnduringPenalty: {
+      get () {
+        return this.$store.state.parameters.failureEnduringPenalty
+      },
+      set (value) {
+        this.$store.commit('updateFailureEnduringPenalty', value)
       },
     },
     totalLongetivityYears: {

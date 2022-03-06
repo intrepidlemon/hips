@@ -11,6 +11,8 @@ export const run = (
   discount,
   failureMode,
   lifeExpectancyDistribution,
+  failureEnduringPenalty,
+  dislocationEnduringPenalty,
 ) => {
   years = determinedYearsToLive(years, lifeExpectancyDistribution)
 
@@ -32,8 +34,26 @@ export const run = (
       break
   }
 
-  const totalUtility = simulate(years, utilities(totalUtils), { dislocation: totalDislocation, failure: totalFailure }, totalDiscount)
-  const hemiUtility = simulate(years, utilities(hemiUtils), { dislocation: hemiDislocation, failure: hemiFailure }, hemiDiscount)
+  const totalUtility = simulate(
+    years,
+    utilities(totalUtils),
+    { dislocation: totalDislocation, failure: totalFailure },
+    totalDiscount,
+    failureEnduringPenalty,
+    dislocationEnduringPenalty,
+    false,
+    false,
+  )
+  const hemiUtility = simulate(
+    years,
+    utilities(hemiUtils),
+    { dislocation: hemiDislocation, failure: hemiFailure },
+    hemiDiscount,
+    failureEnduringPenalty,
+    dislocationEnduringPenalty,
+    false,
+    false,
+  )
 
   return {
     total: totalUtility,

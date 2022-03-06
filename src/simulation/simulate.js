@@ -18,7 +18,16 @@ export const modifiedHyperbolicDiscount = () => {
 
 // simulate is a recursive function that calculates the utility
 // of a device year after year
-const simulate = (years, utilities, probabilities, discount) => {
+const simulate = (
+  years,
+  utilities,
+  probabilities,
+  discount,
+  failureEnduringPenalty,
+  dislocationEnduringPenalty,
+  failed,
+  dislocated,
+) => {
   const {
     dislocation: dislocationUtil,
     failure: failureUtil,
@@ -34,7 +43,6 @@ const simulate = (years, utilities, probabilities, discount) => {
   const pFailure = failureProb()
 
   let total = 0
-  let failed = false
   const fUtil = failureUtil()
   const dUtil = dislocationUtil()
   const sUtil = successUtil()
@@ -43,14 +51,31 @@ const simulate = (years, utilities, probabilities, discount) => {
     failed = true
   } else if (Math.random() < pDislocation) {
     total += dUtil
+    dislocated = true
   } else {
     total += sUtil
   }
 
   total *= discount()
 
-  if (years > 0 && !failed) {
-    return total + NPV_DISCOUNT * simulate(years - 1, utilities, probabilities, discount)
+  if (failed) {
+    total *= 1 - failureEnduringPenalty
+  }
+  if (dislocated) {
+    total *= 1 - dislocationEnduringPenalty
+  }
+
+  if (years > 0) {
+    return total + NPV_DISCOUNT * simulate(
+      years - 1,
+      utilities,
+      probabilities,
+      discount,
+      failureEnduringPenalty,
+      dislocationEnduringPenalty,
+      failed,
+      dislocated,
+    )
   }
   return total
 }
