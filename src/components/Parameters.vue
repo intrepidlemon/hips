@@ -3,7 +3,7 @@
     <sui-card>
       <sui-card-content>
         <h3 class="patient-header" is="sui-header">
-          <div>Patient information</div>
+          <div>Patient features</div>
           <sui-button v-on:click="reset">Reset default parameters</sui-button>
         </h3>
         <div class="section">
@@ -41,7 +41,7 @@
           </sui-form-field>
         </div>
 
-        <div class="section hidden">
+        <div class="section">
           <sui-form-field>
             <label>
               utility discounting
@@ -174,7 +174,7 @@
         <sui-accordion>
           <a is="sui-accordion-title">
             <sui-icon name="dropdown" />
-            <h3 class="accordion-header" is="sui-header">Device information</h3>
+            <h3 class="accordion-header" is="sui-header">Device features</h3>
           </a>
           <sui-accordion-content>
 
