@@ -20,6 +20,7 @@ const defaultParameters = {
   discount: 'none',
   failureMode: 'quadratic',
   clinicalSignificance: 0.05,
+  lifeExpectancyDistribution: 'empiric',
 }
 
 const state = { ...defaultParameters }
@@ -44,6 +45,7 @@ const mutations = {
   updateFailureMode: (state, value) => { state.failureMode = value },
   updateClinicalSignificance: (state, value) => { state.clinicalSignificance = value },
   updateYearTotalDislocationEquals: (state, value) => { state.yearTotalDislocationEquals = value },
+  updateLifeExpectancyDistribution: (state, value) => { state.lifeExpectancyDistribution = value },
   resetDefaultParameters: (state, value) => { Object.assign(state, defaultParameters) },
   calculateLifeExpectancy: (state, value) => { state.years = lifeExpectancy(state.age) },
 }

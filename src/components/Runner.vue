@@ -61,6 +61,7 @@ export default {
     single: function () {
       const {
         years,
+        lifeExpectancyDistribution,
         totalSuccess,
         hemiSuccess,
         failure,
@@ -111,6 +112,7 @@ export default {
         },
         discount,
         failureMode,
+        lifeExpectancyDistribution,
       )
       this.$store.commit('pushTotal', result.total)
       this.$store.commit('pushHemi', result.hemi)

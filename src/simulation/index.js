@@ -10,8 +10,9 @@ export const run = (
   { totalDislocationRate, hemiDislocationRate, yearTotalDislocationEquals },
   discount,
   failureMode,
+  lifeExpectancyDistribution,
 ) => {
-  years = determinedYearsToLive(years)
+  years = determinedYearsToLive(years, lifeExpectancyDistribution)
 
   const { total: totalDislocation, hemi: hemiDislocation } = probabilities.dislocation({ total: totalDislocationRate, hemi: hemiDislocationRate, yearToEqual: yearTotalDislocationEquals })
   const { total: totalFailure, hemi: hemiFailure } = probabilities.failure({ total: totalLongetivity, hemi: hemiLongetivity, mode: failureMode })

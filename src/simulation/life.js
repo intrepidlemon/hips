@@ -1,4 +1,4 @@
-import { equalDistribution } from './random'
+import { normalize, equalDistribution } from './random'
 
 // life expectancy distribution based on male VA data
 const distribution = [
@@ -44,14 +44,24 @@ const createNewDistribution = (years) => {
 export const distributions = [...Array(16).keys()].map(k => createNewDistribution(k))
 
 // determine how many more years this particular person will have to live based on life expectancy
-export const determinedYearsToLive = lifeExpectancy => {
-  let diceRollTotal = equalDistribution({})
-  const currentDistribution = distributions[lifeExpectancy]
+export const determinedYearsToLive = (lifeExpectancy, lifeExpectancyDistribution) => {
+  if (lifeExpectancyDistribution === 'empiric') {
+    let diceRollTotal = equalDistribution({})
+    const currentDistribution = distributions[lifeExpectancy]
 
-  let i = 0
-  while (diceRollTotal > 0) {
-    diceRollTotal = diceRollTotal - currentDistribution[i]
-    i++
+    let i = 0
+    while (diceRollTotal > 0) {
+      diceRollTotal = diceRollTotal - currentDistribution[i]
+      i++
+    }
+    return i
+  } else if (lifeExpectancyDistribution === 'normal') {
+    const std = 8 // per Dr. Bernstein
+    let years = normalize({ mean: lifeExpectancy, std: std })
+    if (years < 0) {
+      return 0
+    }
+    return years
   }
-  return i
+  return 0
 }
