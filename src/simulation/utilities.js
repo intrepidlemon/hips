@@ -18,7 +18,7 @@ const successUtil = (maxUtil, years, immediatePenalty) => {
   const discountFunc = discountFunction({ years })
   let i = 0
   return () => {
-    util -= maxUtil * discountFunc(i) - immediatePenalty
+    util -= maxUtil * discountFunc(i) + immediatePenalty
     i += 1
     immediatePenalty = 0
     return Math.max(0, util)
