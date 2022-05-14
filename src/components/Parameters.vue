@@ -39,26 +39,7 @@
               name="years"
             />
           </sui-form-field>
-          <sui-form-field>
-            <label>
-             life expectancy distribution
-              <ExplanationIndicator :entry="content['life-expectancy']"/>
-            </label>
-            <sui-menu :widths="2">
-              <sui-menu-item
-                @click="lifeExpectancyDistribution = 'empiric'"
-                :active="lifeExpectancyDistribution === 'empiric'"
-              >
-                empiric
-              </sui-menu-item>
-              <sui-menu-item
-                @click="lifeExpectancyDistribution = 'normal'"
-                :active="lifeExpectancyDistribution === 'normal'"
-              >
-                normal
-              </sui-menu-item>
-            </sui-menu>
-          </sui-form-field>
+
         </div>
 
         <div class="section">
@@ -422,6 +403,26 @@
                  v-model="trials"
                  name="trials"
                  />
+              </sui-form-field>
+              <sui-form-field>
+                <label>
+                 life expectancy distribution
+                  <ExplanationIndicator :entry="content['life-expectancy']"/>
+                </label>
+                <sui-menu :widths="2">
+                  <sui-menu-item
+                    @click="lifeExpectancyDistribution = 'empiric'"
+                    :active="lifeExpectancyDistribution === 'empiric'"
+                  >
+                    empiric
+                  </sui-menu-item>
+                  <sui-menu-item
+                    @click="lifeExpectancyDistribution = 'normal'"
+                    :active="lifeExpectancyDistribution === 'normal'"
+                  >
+                    normal
+                  </sui-menu-item>
+                </sui-menu>
               </sui-form-field>
             </div>
 
